@@ -1197,11 +1197,11 @@ const Home = () => {
       {/* how it works section end */}
 
       {/* FORM SECTION START HERE */}
-      <div className="container mine-container">
+      <div className="container">
         <h2 className="my-h2 text-center">
           Achieve Your Financial Goals with <br /> a Personalized Assessment
         </h2>
-        <div className="container">
+        <div className="container mine-container">
           {/* Left Side: Form */}
           <div className=''>
             <article className="tabbed-content tabs-side">

@@ -1002,7 +1002,10 @@ padding-top: 50px !important;
 padding-bottom: 26px !important;
 }
 .container{
-padding: 20px;
+padding: 20px !important;
+}
+.container.mine-container {
+  padding: 0px !important;
 }
 .about-content p {
 font-size: 14px;

@@ -55,6 +55,7 @@ const Home = () => {
   const [savingsGoal2Amount, setSavingsGoal2Amount] = useState("");
   const [savingsGoal2Years, setSavingsGoal2Years] = useState("");
   const [showGoal2, setShowGoal2] = useState(true);
+  const [ageError, setAgeError] = useState('');
 
 
   const [monthlySavingsContribution, setMonthlySavingsContribution] = useState("");
@@ -108,6 +109,7 @@ const Home = () => {
 
   const [additionalExpenses, setAdditionalExpenses] = useState([]);
   const [additionalVariableExpenses, setAdditionalVariableExpenses] = useState([]);
+  const [totalOtherMonthlyIncome, setTotalOtherMonthlyIncome] = useState("");
 
 
 
@@ -131,6 +133,32 @@ const Home = () => {
       };
       return newExpenses;
     });
+  };
+
+
+  const handleAgeChange = (e) => {
+    const value = e.target.value;
+    setAge(value);
+    // Allow empty input
+    if (value === '') {
+      setAge('');
+      setAgeError('');
+      return;
+    }
+
+    // Convert to number and validate
+    const numValue = parseInt(value);
+    if (isNaN(numValue)) {
+      
+      setAgeError('Please enter a valid number');
+    } else if (numValue < 18) {
+      setAgeError('Age must be at least 18');
+    } else if (numValue > 75) {
+      setAgeError('Age must not exceed 75');
+    } else {
+      setAge(value);
+      setAgeError('');
+    }
   };
 
   const handleExpenseChange = (index, field, value) => {
@@ -246,6 +274,7 @@ const Home = () => {
       has_valuable_assets: hasValuableAssets,
       valuable_assets_value: parseFloat(valuableAssetsValue) || 0,
       has_mortgage: hasmortgage,
+      total_other_monthly_income: totalOtherMonthlyIncome,
       mortgage_balance: parseFloat(mortgageBalance) || 0,
       monthly_mortgage_payment: parseFloat(monthlymortgagePayment) || 0,
       mortgage_interest_rate: parseFloat(mortgageInterestRate) || 0,
@@ -347,6 +376,7 @@ const Home = () => {
       has_valuable_assets: hasValuableAssets,
       valuable_assets_value: parseFloat(valuableAssetsValue) || 0,
       has_mortgage: hasmortgage,
+      total_other_monthly_income: totalOtherMonthlyIncome,
       mortgage_balance: parseFloat(mortgageBalance) || 0,
       monthly_mortgage_payment: parseFloat(monthlymortgagePayment) || 0,
       mortgage_interest_rate: parseFloat(mortgageInterestRate) || 0,
@@ -1282,14 +1312,20 @@ const Home = () => {
                   <div className={`form-section ${activeTab === 0 ? "active" : ""}`}>
                     <h2>Personal Financial Overview (Net Worth Calculation)</h2>
                     <p>Please provide information about your assets and liabilities</p>
+
                     <div className="form-group">
                       <label>Enter Your Age?</label>
                       <input
                         type="number"
-                        placeholder="Enter your Age (Age must be between 18 to 75)"
+                        placeholder="Enter your Age (18-75)"
                         value={age}
-                        onChange={(e) => setAge(e.target.value)}
+                        onChange={handleAgeChange}
+                        min="18"
+                        max="75"
+                        className={ageError ? 'input-error' : ''}
+                        disabled={false}  // Explicitly ensure it's not disabled
                       />
+                      {ageError && <span className="error-message">{ageError}</span>}
                     </div>
 
                     <div className="form-group">
@@ -1519,9 +1555,11 @@ const Home = () => {
 
 
                     <div className="nav-buttons d-flex justify-content-between">
-                      <button className="btn-next" onClick={(e) => { e.stopPropagation(); showTab(1); }}>
-                        Income & Expenses →
-                      </button>
+                      <a href="#Form-Main">
+                        <button className="btn-next" onClick={(e) => { e.stopPropagation(); showTab(1); }}>
+                          Income & Expenses →
+                        </button>
+                      </a>
                       <button className="btn-next" onClick={(e) => { handleSubmitSteps(); }}>
                         Generate
                       </button>
@@ -1543,6 +1581,16 @@ const Home = () => {
                         placeholder="£ Enter Amount"
                         value={monthlyIncome}
                         onChange={(e) => setMonthlyIncome(e.target.value)}
+                      />
+                    </div>
+
+                    <div className="form-group">
+                      <label>Total other Monthly Income?</label>
+                      <input
+                        type="text"
+                        placeholder="£ Enter Amount"
+                        value={totalOtherMonthlyIncome}
+                        onChange={(e) => setTotalOtherMonthlyIncome(e.target.value)}
                       />
                     </div>
                     <div className="form-group">
@@ -1598,7 +1646,7 @@ const Home = () => {
 
                       {/* Render additional expense fields */}
                       {additionalExpenses.map((expense, index) => (
-                        <div className="form-group" key={index}>
+                        <div className="form-group my-group" key={index}>
                           <input
                             type="text"
                             placeholder="Expense Name (e.g., Food, Fuel)"
@@ -1638,7 +1686,7 @@ const Home = () => {
 
                       {/* Render additional variable expense fields */}
                       {additionalVariableExpenses.map((expense, index) => (
-                        <div className="form-group" key={index}>
+                        <div className="form-group my-group" key={index}>
                           <input
                             type="text"
                             placeholder="Expense Name (e.g., Groceries, Transport)"
@@ -1656,12 +1704,16 @@ const Home = () => {
                       ))}
                     </>
                     <div className="nav-buttons">
-                      <button className="btn-back" onClick={(e) => { e.stopPropagation(); showTab(0) }}>
-                        ← Back to Financial Overview
-                      </button>
-                      <button className="btn-next" onClick={(e) => { e.stopPropagation(); showTab(2); }}>
-                        Savings & Goals →
-                      </button>
+                      <a href="#Form-Main">
+                        <button className="btn-back" onClick={(e) => { e.stopPropagation(); showTab(0) }}>
+                          ← Back to Financial Overview
+                        </button>
+                      </a>
+                      <a href="#Form-Main">
+                        <button className="btn-next" onClick={(e) => { e.stopPropagation(); showTab(2); }}>
+                          Savings & Goals →
+                        </button>
+                      </a>
 
                     </div>
                     <div className="btn-gen mt-2">
@@ -1749,10 +1801,10 @@ const Home = () => {
                         {showGoal2 && (
                           <div className="goal-2-container">
                             <div className="form-group "><label>Goal 2:</label>
-                            <div className="dlt-btn d-flex gap-3 align-items-center">
-                            <input type="text" className='form-group1' placeholder="Enter Goal Description" value={savingsGoal2Description} onChange={(e) => setSavingsGoal2Description(e.target.value)} />
-                            {/* <button className="delete-button" onClick={() => setShowGoal2(false)}><i class="fa-solid fa-trash"></i></button> */}
-                            </div>
+                              <div className="dlt-btn d-flex gap-3 align-items-center">
+                                <input type="text" className='form-group1' placeholder="Enter Goal Description" value={savingsGoal2Description} onChange={(e) => setSavingsGoal2Description(e.target.value)} />
+                                {/* <button className="delete-button" onClick={() => setShowGoal2(false)}><i class="fa-solid fa-trash"></i></button> */}
+                              </div>
                             </div>
                             <div className="form-group">
                               <label>Target Amount:</label>
@@ -1808,12 +1860,16 @@ const Home = () => {
                       </div>
                     </div> */}
                     <div className="nav-buttons">
-                      <button className="btn-back" onClick={(e) => { e.stopPropagation(); showTab(1) }}>
-                        ← Back to Income & Expenses
-                      </button>
-                      <button className="btn-next" onClick={(e) => { e.stopPropagation(); showTab(3); }}>
-                        Debt Management →
-                      </button>
+                      <a href="#Form-Main">
+                        <button className="btn-back" onClick={(e) => { e.stopPropagation(); showTab(1) }}>
+                          ← Back to Income & Expenses
+                        </button>
+                      </a>
+                      <a href="#Form-Main">
+                        <button className="btn-next" onClick={(e) => { e.stopPropagation(); showTab(3); }}>
+                          Debt Management →
+                        </button>
+                      </a>
                     </div>
                     <div className="btn-gen mt-2">
                       <button className='btn-next' onClick={(e) => { handleSubmitSteps(); }}>Generate</button>
@@ -1964,12 +2020,16 @@ const Home = () => {
                       />
                     </div>
                     <div className="nav-buttons">
-                      <button className="btn-back" onClick={(e) => { e.stopPropagation(); showTab(2) }}>
-                        ← Back to Savings & Goals
-                      </button>
-                      <button className="btn-next" onClick={(e) => { e.stopPropagation(); showTab(4); }} >
-                        Retirement Planning →
-                      </button>
+                      <a href="#Form-Main">
+                        <button className="btn-back" onClick={(e) => { e.stopPropagation(); showTab(2) }}>
+                          ← Back to Savings & Goals
+                        </button>
+                      </a>
+                      <a href="#Form-Main">
+                        <button className="btn-next" onClick={(e) => { e.stopPropagation(); showTab(4); }} >
+                          Retirement Planning →
+                        </button>
+                      </a>
                     </div>
                     <div className="btn-gen mt-2">
                       <button className='btn-next' onClick={(e) => { handleSubmitSteps(); }}>Generate</button>
@@ -2119,12 +2179,16 @@ const Home = () => {
                       </div>
                     </div>
                     <div className="nav-buttons">
-                      <button className="btn-back" onClick={(e) => { e.stopPropagation(); showTab(3) }}>
-                        ← Back to Debt Management
-                      </button>
-                      <button className="btn-next" onClick={(e) => { e.stopPropagation(); showTab(5); }}>
-                        Tax Optimization →
-                      </button>
+                      <a href="#Form-Main">
+                        <button className="btn-back" onClick={(e) => { e.stopPropagation(); showTab(3) }}>
+                          ← Back to Debt Management
+                        </button>
+                      </a>
+                      <a href="#Form-Main">
+                        <button className="btn-next" onClick={(e) => { e.stopPropagation(); showTab(5); }}>
+                          Tax Optimization →
+                        </button>
+                      </a>
                     </div>
                     <div className="btn-gen mt-2">
                       <button className='btn-next' onClick={(e) => { handleSubmitSteps(); }}>Generate</button>
@@ -2231,12 +2295,16 @@ const Home = () => {
                       </div>
                     </div>
                     <div className="nav-buttons">
-                      <button className="btn-back" onClick={(e) => { e.stopPropagation(); showTab(4) }}>
-                        ← Back to Retirement Planning
-                      </button>
-                      <button className="btn-next" onClick={(e) => { e.stopPropagation(); showTab(6); }}>
-                        Financial Education →
-                      </button>
+                      <a href="#Form-Main">
+                        <button className="btn-back" onClick={(e) => { e.stopPropagation(); showTab(4) }}>
+                          ← Back to Retirement Planning
+                        </button>
+                      </a>
+                      <a href="#Form-Main">
+                        <button className="btn-next" onClick={(e) => { e.stopPropagation(); showTab(6); }}>
+                          Financial Education →
+                        </button>
+                      </a>
                     </div>
                     <div className="btn-gen mt-2">
                       <button className='btn-next' onClick={(e) => { handleSubmitSteps(); }}>Generate</button>
@@ -2366,12 +2434,16 @@ const Home = () => {
                       </div>
                     </div>
                     <div className="nav-buttons">
-                      <button className="btn-back" onClick={(e) => { e.stopPropagation(); showTab(5) }}>
-                        ← Back to Tax Optimization
-                      </button>
-                      <button className="btn-next" onClick={(e) => { e.stopPropagation(); showTab(7); }}>
-                        Complete →
-                      </button>
+                      <a href="#Form-Main">
+                        <button className="btn-back" onClick={(e) => { e.stopPropagation(); showTab(5) }}>
+                          ← Back to Tax Optimization
+                        </button>
+                      </a>
+                      <a href="#Form-Main">
+                        <button className="btn-next" onClick={(e) => { e.stopPropagation(); showTab(7); }}>
+                          Complete →
+                        </button>
+                      </a>
                     </div>
                     <div className="btn-gen mt-2">
                       <button className='btn-next' onClick={(e) => { handleSubmitSteps(); }}>Generate</button>
@@ -2405,7 +2477,7 @@ const Home = () => {
 
 
         <>
-          {insights && !isLoading? (
+          {insights && !isLoading ? (
             <div className="report-wrapper">
               <div className={`report-container ${isLoading ? 'loading' : ''}`} ref={reportRef}>
                 {/* Loading Overlay */}
@@ -2539,7 +2611,7 @@ const Home = () => {
                 </div>
               </div>
             </div>
-          ) : <> {isLoading?<>Generating Reports....</>:<></>}</>}
+          ) : <> {isLoading ? <>Generating Reports....</> : <></>}</>}
 
           {insights ? (
             <div className="download-button-container">

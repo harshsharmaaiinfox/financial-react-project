@@ -1179,6 +1179,10 @@ div#success-message {
   padding-bottom: 30px;
 }
 
+.my-group input {
+  margin-bottom: 5px;
+}
+
 @media all and (min-width: 1000px) {
   .tabbed-content {
     .tabs {

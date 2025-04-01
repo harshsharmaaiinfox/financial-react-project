@@ -13,30 +13,20 @@ import {
 } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from "chart.js";
 
-// Register Chart.js components
 ChartJS.register(ArcElement, Tooltip, Legend, BarElement, CategoryScale, LinearScale);
-
-
-
-
 
 const Home = () => {
 
 
-  // downloading loaders
-
   const [isDownloading, setIsDownloading] = useState(false);
-
   const [activeTab, setActiveTab] = useState(0);
-
   const [bankSavings, setBankSavings] = useState("");
-
+  const [age, setAge] = useState("");
   const [needsTaxHelp, setNeedsTaxHelp] = useState(false);
   const [needsBudgetHelp, setNeedsBudgetHelp] = useState(false);
   const [needsDebtHelp, setNeedsDebtHelp] = useState(false);
   const [needsRetirementHelp, setNeedsRetirementHelp] = useState(false);
   const [needsRealEstateHelp, setNeedsRealEstateHelp] = useState(false);
-
   const [iasSavings, setIasSavings] = useState("");
   const [emergencySavings, setEmergencySavings] = useState("");
   const [cashSavings, setCashSavings] = useState("");
@@ -98,15 +88,11 @@ const Home = () => {
   const [plannedRetirementAgeError, setPlannedRetirementAgeError] = useState("");
   const [creditCardBalance, setCreditCardBalance] = useState("");
   const [creditCardInterestRate, setCreditCardInterestRate] = useState("");
-
-
   const [id, setId] = useState(null);
-  // query states
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const [keyword, setKeyword] = useState("");
   const [isResultVisible, setIsResultVisible] = useState(false);
-  // Query Design
   const [htmlDesign, setHtmlDesign] = useState("");
   const chartRef = useRef(null);
 
@@ -146,9 +132,6 @@ const Home = () => {
       aTag.classList.add('active');
     }
   };
-
-
-
 
   const reportRef = useRef();
 
@@ -264,7 +247,7 @@ const Home = () => {
 
       const response = await apiPost("api/generate", formData);
       if (response?.data?.status === true) {
-        setStepsInsights(response?.data?.data);
+        setInsights(response?.data?.data);
         setId(response?.data?.id);
         //setActiveTab(8);
       }
@@ -354,7 +337,7 @@ const Home = () => {
       if (response?.data?.status === true) {
         setInsights(response?.data?.data);
         setId(response?.data?.id);
-        setActiveTab(8);
+        showTab(7);
       }
 
 
@@ -1224,6 +1207,16 @@ const Home = () => {
                     <h2>Personal Financial Overview (Net Worth Calculation)</h2>
                     <p>Please provide information about your assets and liabilities</p>
                     <div className="form-group">
+                      <label>Age?</label>
+                      <input
+                        type="number"
+                        placeholder="£ Enter Age"
+                        value={age}
+                        onChange={(e) => setAge(e.target.value)}
+                      />
+                    </div>
+
+                    <div className="form-group">
                       <label>Total bank accounts savings?</label>
                       <input
                         type="text"
@@ -1552,7 +1545,6 @@ const Home = () => {
 
                 </div>
               </section>
-
               <section id="tab3" className={activeTab === 2 ? "activeTab item active" : "inactiveTab item "} onClick={() => { showTab(2); handleSubmitSteps(); }} data-title="Savings & Goals" >
                 <div className="item-content">
 
@@ -1662,12 +1654,10 @@ const Home = () => {
 
                 </div>
               </section>
-
-
               <section id="tab4" className="item" data-title="Debt Management" onClick={() => { showTab(3); handleSubmitSteps(); }} >
                 <div className="item-content">
 
-                  <div className={`form-section ${activeTab === 3 ? "active" : ""}`}>
+                  <div className={`form-section pt-4 pb-4 ${activeTab === 3 ? "active" : ""}`}>
                     <h2>Debt Management</h2>
                     <p>Please provide information about your debt management strategy</p>
                     <div className="form-group">
@@ -2192,179 +2182,6 @@ const Home = () => {
               </section>
             </article>
           </div>
-          {stepsInsights ? <>
-
-            <div className="response-container">
-              <h2>Financial Insights</h2>
-              {stepsInsights ? (
-                <div className="insights-wrapper">
-                  {/* Net Worth Section */}
-                  <div className="insight-section">
-                    <div className="section-header" onClick={() => toggleSection("net_worth")}>
-                      <h3>Net Worth</h3>
-                      <span>{expandedSections.net_worth ? "−" : "+"}</span>
-                    </div>
-                    {expandedSections.net_worth && (
-                      <div className="section-content">
-                        <p><strong>Total Net Worth:</strong> £{stepsInsights?.net_worth?.total.toLocaleString()}</p>
-                        <div className="sub-section">
-                          <h4>Assets</h4>
-                          <p>Cash Savings: £{stepsInsights?.net_worth?.assets?.cash_savings.toLocaleString()}</p>
-                          <p>Primary Residence: £{stepsInsights?.net_worth?.assets?.primary_residence_value.toLocaleString()}</p>
-                          <p>Investments: £{stepsInsights?.net_worth?.assets?.investments_value.toLocaleString()}</p>
-                          <p>Pension Balance: £{stepsInsights?.net_worth?.assets?.pension_balance.toLocaleString()}</p>
-                        </div>
-                        <div className="sub-section">
-                          <h4>Liabilities</h4>
-                          <p>Mortgage Balance: £{stepsInsights?.net_worth?.liabilities?.mortgage_balance.toLocaleString()}</p>
-                          <p>Credit Card Balance: £{stepsInsights?.net_worth?.liabilities?.credit_card_balance.toLocaleString()}</p>
-                          <p>Personal Loan Balance: £{stepsInsights?.net_worth?.liabilities?.personal_loan_balance.toLocaleString()}</p>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Cash Flow Section */}
-                  <div className="insight-section">
-                    <div className="section-header" onClick={() => toggleSection("cash_flow")}>
-                      <h3>Cash Flow</h3>
-                      <span>{expandedSections.cash_flow ? "−" : "+"}</span>
-                    </div>
-                    {expandedSections.cash_flow && (
-                      <div className="section-content">
-                        <p><strong>Net Cash Flow:</strong> £{stepsInsights?.cash_flow?.net.toLocaleString()}</p>
-                        <div className="sub-section">
-                          <h4>Income</h4>
-                          <p>Total Income: £{stepsInsights?.cash_flow?.income.toLocaleString()}</p>
-                        </div>
-                        <div className="sub-section">
-                          <h4>Expenses</h4>
-                          <p>Monthly Mortgage Payment: £{stepsInsights?.cash_flow?.expenses?.monthly_mortgage_payment.toLocaleString()}</p>
-                          <p>Monthly Fixed Expenses: £{stepsInsights?.cash_flow?.expenses?.monthly_fixed_expenses.toLocaleString()}</p>
-                          <p>Monthly Variable Expenses: £{stepsInsights?.cash_flow?.expenses?.monthly_variable_expenses.toLocaleString()}</p>
-                          <p>Monthly Savings Contribution: £{stepsInsights?.cash_flow?.expenses?.monthly_savings_contribution.toLocaleString()}</p>
-                          <p>Monthly Pension Contribution: £{stepsInsights?.cash_flow?.expenses?.monthly_pension_contribution.toLocaleString()}</p>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Debt Section */}
-                  <div className="insight-section">
-                    <div className="section-header" onClick={() => toggleSection("debt")}>
-                      <h3>Debt</h3>
-                      <span>{expandedSections.debt ? "−" : "+"}</span>
-                    </div>
-                    {expandedSections.debt && (
-                      <div className="section-content">
-                        <p><strong>Mortgage Balance:</strong> £{stepsInsights?.debt?.mortgage_balance.toLocaleString()}</p>
-                        <p>Monthly Mortgage Payment: £{stepsInsights?.debt?.monthly_mortgage_payment.toLocaleString()}</p>
-                        <p>Mortgage Interest Rate: {stepsInsights?.debt?.mortgage_interest_rate}%</p>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Investments & Savings Section */}
-                  <div className="insight-section">
-                    <div className="section-header" onClick={() => toggleSection("investments_savings")}>
-                      <h3>Investments & Savings</h3>
-                      <span>{expandedSections.investments_savings ? "−" : "+"}</span>
-                    </div>
-                    {expandedSections.investments_savings && (
-                      <div className="section-content">
-                        <p><strong>Cash Savings:</strong> £{stepsInsights?.investments_savings?.cash_savings.toLocaleString()}</p>
-                        <p>Investments Value: £{stepsInsights?.investments_savings?.investments_value.toLocaleString()}</p>
-                        <p>Investment Allocation: {stepsInsights?.investments_savings?.investment_allocation_percentage}%</p>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Retirement Section */}
-                  <div className="insight-section">
-                    <div className="section-header" onClick={() => toggleSection("retirement")}>
-                      <h3>Retirement</h3>
-                      <span>{expandedSections.retirement ? "−" : "+"}</span>
-                    </div>
-                    {expandedSections.retirement && (
-                      <div className="section-content">
-                        <p><strong>Pension Balance:</strong> £{stepsInsights?.retirement?.pension_balance.toLocaleString()}</p>
-                        <p>Monthly Pension Contribution: £{stepsInsights?.retirement?.monthly_pension_contribution.toLocaleString()}</p>
-                        <p>Employer Matches Pension: {stepsInsights?.retirement?.employer_matches_pension ? "Yes" : "No"}</p>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Recommendations Section */}
-                  <div className="insight-section">
-                    <div className="section-header" onClick={() => toggleSection("recommendations")}>
-                      <h3>Recommendations & Insights</h3>
-                      <span>{expandedSections.recommendations ? "−" : "+"}</span>
-                    </div>
-                    {expandedSections.recommendations && (
-                      <div className="section-content">
-                        <div className="sub-section">
-                          <h4>Actionable Recommendations</h4>
-                          {stepsInsights?.recommendations?.recommadations?.map((rec, index) => (
-                            <div key={index} className="recommendation-item">
-                              <p><strong>{rec.action}:</strong> {rec.recommendation}</p>
-                            </div>
-                          ))}
-                        </div>
-                        <div className="sub-section">
-                          <h4>Budget Insights</h4>
-                          <p><strong>Categorize Expenses:</strong> {stepsInsights?.recommendations?.insights?.budget_insights?.categorize_expenses}</p>
-                          <p><strong>Flag Overspending:</strong> {stepsInsights?.recommendations?.insights?.budget_insights?.flag_overspending}</p>
-                          <p><strong>Savings Rate:</strong> {stepsInsights?.recommendations?.insights?.budget_insights?.savings_rate}</p>
-                          <p><strong>Improvements:</strong> {stepsInsights?.recommendations?.insights?.budget_insights?.improvements}</p>
-                        </div>
-                        <div className="sub-section">
-                          <h4>Debt Management</h4>
-                          <p><strong>Debt-to-Income Ratio:</strong> {stepsInsights?.recommendations?.insights?.debt_management?.debt_to_income_ratio}</p>
-                          <p><strong>Repayment Strategies:</strong> {stepsInsights?.recommendations?.insights?.debt_management?.repayment_strategies}</p>
-                          <p><strong>Improvements:</strong> {stepsInsights?.recommendations?.insights?.debt_management?.improvements}</p>
-                        </div>
-                        <div className="sub-section">
-                          <h4>Investment Guidance</h4>
-                          <p><strong>Asset Allocation:</strong> {stepsInsights?.recommendations?.insights?.investment_guidance?.asset_allocation}</p>
-                          <p><strong>Diversification Suggestions:</strong> {stepsInsights?.recommendations?.insights?.investment_guidance?.diversification_suggestions}</p>
-                          <p><strong>Improvements:</strong> {stepsInsights?.recommendations?.insights?.investment_guidance?.improvements}</p>
-                        </div>
-                        <div className="sub-section">
-                          <h4>Financial Health Score</h4>
-                          <p><strong>Overall Rating:</strong> {stepsInsights?.recommendations?.insights?.financial_health_score?.overall_rating}</p>
-                          <p><strong>Strengths:</strong> {stepsInsights?.recommendations?.insights?.financial_health_score?.strengths}</p>
-                          <p><strong>Weaknesses:</strong> {stepsInsights?.recommendations?.insights?.financial_health_score?.weaknesses}</p>
-                          <p><strong>Improvements:</strong> {stepsInsights?.recommendations?.insights?.financial_health_score?.improvements}</p>
-                        </div>
-                        <div className="sub-section">
-                          <h4>Custom Recommendations</h4>
-                          <p><strong>Expense Reduction:</strong> {stepsInsights?.recommendations?.insights?.custom_recommendations?.expense_reduction}</p>
-                          <p><strong>Savings Optimization:</strong> {stepsInsights?.recommendations?.insights?.custom_recommendations?.savings_optimization}</p>
-                          <p><strong>Tax Strategies:</strong> {stepsInsights?.recommendations?.insights?.custom_recommendations?.tax_strategies}</p>
-                          <p><strong>Retirement Planning:</strong> {stepsInsights?.recommendations?.insights?.custom_recommendations?.retirement_planning}</p>
-                          <p><strong>Improvements:</strong> {stepsInsights?.recommendations?.insights?.custom_recommendations?.improvements}</p>
-                        </div>
-                        <div className="sub-section">
-                          <h4>Retirement Planning</h4>
-                          <p><strong>Future Savings Projection:</strong> {stepsInsights?.recommendations?.insights?.retirement_planning?.future_savings_projection}</p>
-                          <p><strong>Improvements:</strong> {stepsInsights?.recommendations?.insights?.retirement_planning?.improvements}</p>
-                        </div>
-                        <div className="sub-section">
-                          <h4>Disclaimer</h4>
-                          <p>{stepsInsights?.recommendations?.insights?.disclaimer?.disclaimer}</p>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              ) : (
-                <p className="no-insights">Complete the form to see your financial insights.</p>
-              )}
-            </div>
-
-          </> : <></>
-          }
-
         </div>
 
 
@@ -2387,9 +2204,11 @@ const Home = () => {
                 {/* Cash Flow Charts */}
                 <div className="chart-section">
                   <Pie data={cashFlowExpensesData} options={cashFlowExpensesOptions} />
+                  <p></p>
                 </div>
                 <div className="chart-section">
                   <Bar data={cashFlowIncomeData} options={cashFlowIncomeOptions} />
+                  <p></p>
                 </div>
 
                 {/* Debt Chart */}
@@ -2446,7 +2265,6 @@ const Home = () => {
                         </td>
                       </tr>
 
-                      {/* Debt Management */}
                       <tr>
                         <td>Debt Management</td>
                         <td>

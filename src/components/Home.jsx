@@ -1200,7 +1200,7 @@ const Home = () => {
                   <li><a className={activeTab === 7 ? "activeTab" : "inactiveTab"} onClick={() => showTab(7)} > Complete</a></li>
                 </ul>
               </nav>
-              <section id="tab1" className={activeTab === 0 ? "activeTab item active" : "inactiveTab item active"} onClick={() => { showTab(0); handleSubmitSteps(); }} data-title="Personal Financial Overview"  >
+              <section id="tab1" className={activeTab === 0 ? "activeTab item active" : "inactiveTab item active"} onClick={() => { showTab(0); }} data-title="Personal Financial Overview"  >
                 <div className="item-content">
 
                   <div className={`form-section ${activeTab === 0 ? "active" : ""}`}>
@@ -1468,7 +1468,7 @@ const Home = () => {
 
                 </div>
               </section>
-              <section id="tab2" className={activeTab === 1 ? "activeTab item active" : "inactiveTab item "} onClick={() => { showTab(1); handleSubmitSteps(); }} data-title="Income & Expenses"  >
+              <section id="tab2" className={activeTab === 1 ? "activeTab item active" : "inactiveTab item "} onClick={() => { showTab(1); }} data-title="Income & Expenses"  >
                 <div className="item-content">
 
                   <div className={`form-section ${activeTab === 1 ? "active" : ""}`}>
@@ -1545,7 +1545,7 @@ const Home = () => {
 
                 </div>
               </section>
-              <section id="tab3" className={activeTab === 2 ? "activeTab item active" : "inactiveTab item "} onClick={() => { showTab(2); handleSubmitSteps(); }} data-title="Savings & Goals" >
+              <section id="tab3" className={activeTab === 2 ? "activeTab item active" : "inactiveTab item "} onClick={() => { showTab(2);  }} data-title="Savings & Goals" >
                 <div className="item-content">
 
                   <div className={`form-section ${activeTab === 2 ? "active" : ""}`}>
@@ -1654,7 +1654,7 @@ const Home = () => {
 
                 </div>
               </section>
-              <section id="tab4" className="item" data-title="Debt Management" onClick={() => { showTab(3); handleSubmitSteps(); }} >
+              <section id="tab4" className="item" data-title="Debt Management" onClick={() => { showTab(3); }} >
                 <div className="item-content">
 
                   <div className={`form-section pt-4 pb-4 ${activeTab === 3 ? "active" : ""}`}>
@@ -1779,7 +1779,7 @@ const Home = () => {
 
                 </div>
               </section>
-              <section id="tab5" className="item" data-title="Retirement Planning" onClick={() => { showTab(4); handleSubmitSteps(); }}>
+              <section id="tab5" className="item" data-title="Retirement Planning" onClick={() => { showTab(4);  }}>
                 <div className="item-content">
 
                   <div className={`form-section ${activeTab === 4 ? "active" : ""}`}>
@@ -1920,7 +1920,7 @@ const Home = () => {
 
                 </div>
               </section>
-              <section id="tab6" className="item" data-title="Tax Optimization" onClick={() => { showTab(5); handleSubmitSteps(); }} >
+              <section id="tab6" className="item" data-title="Tax Optimization" onClick={() => { showTab(5);  }} >
                 <div className="item-content">
                   <div className={`form-section ${activeTab === 5 ? "active" : ""}`}>
                     <h2>Tax Optimization</h2>
@@ -2030,7 +2030,7 @@ const Home = () => {
 
                 </div>
               </section>
-              <section id="tab7" className="item" data-title="Financial Education" onClick={() => { showTab(6); handleSubmitSteps(); }} >
+              <section id="tab7" className="item" data-title="Financial Education" onClick={() => { showTab(6); }} >
                 <div className="item-content">
 
 
@@ -2161,7 +2161,7 @@ const Home = () => {
 
                 </div>
               </section>
-              <section id="tab8" className="item" data-title="Completed" onClick={() => { showTab(7); handleSubmitSteps(); }}>
+              <section id="tab8" className="item" data-title="Completed" onClick={() => { showTab(7); }}>
                 <div className="item-content">
 
                   <div className={`form-section ${activeTab === 7 ? "active" : ""}`} id="success-message" style={{ textAlign: "center" }}>

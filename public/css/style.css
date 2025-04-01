@@ -22,7 +22,10 @@
 .nav-link:hover, .nav-link.active {
   color: var(--primary-color) !important;
 }
-
+.cta-button a {
+  color: #fff;
+  text-decoration: none;
+}
 .navbar-toggler {
   border: none;
   font-size: 22px;
@@ -1184,6 +1187,7 @@ div#success-message {
         display: inline-block;
         a {
           display: block;
+          cursor: pointer;
           text-decoration: none;
           /* color: #000 !important; */
         }

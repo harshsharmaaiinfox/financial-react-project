@@ -860,9 +860,9 @@ const Home = () => {
             </p>
 
             <div class="cta-section">
-              <button class="cta-button primary">Explore your options</button>
-              <button class="cta-button secondary">Chat with our AI</button>
-              <button class="cta-button secondary">Get ideas to move forward</button>
+              <button class="cta-button primary"><a href="#Form-Main">Explore your options</a></button>
+              <button class="cta-button secondary"><a href="#Form-Main">Chat with our AI</a></button>
+              <button class="cta-button secondary"><a href="#Form-Main">Get ideas to move forward</a></button>
               <p class="disclaimer"><i class="fas fa-exclamation-triangle"></i> General guidance only — not financial advice.</p>
             </div>
           </div>
@@ -897,8 +897,8 @@ const Home = () => {
         <div className="row">
           <div className="col-lg-12 pt-4 pb-4">
             <div className="btn-section">
-              <a href="#" className='cta-button secondary'>Learn How It Works</a>
-              <a href="#" className='cta-button secondary'>Try the AI Tool </a>
+              <a href="#" className='cta-button secondary'><a href="#Form-Main">Learn How It Works</a></a>
+              <a href="#" className='cta-button secondary'><a href="#Form-Main">Try the AI Tool </a></a>
             </div>
           </div>
         </div>
@@ -1256,7 +1256,7 @@ const Home = () => {
       {/* how it works section end */}
 
       {/* FORM SECTION START HERE */}
-      <div className="container">
+      <div className="container" id="Form-Main">
         <h2 className="my-h2 text-center">
           Achieve Your Financial Goals with <br /> a Personalized Assessment
         </h2>
@@ -1384,7 +1384,7 @@ const Home = () => {
                       </div>
                     </div>
                     <div className="form-group">
-                      <label>Do you have investments other than pension(s) (stocks, bonds, ETFs, crypto)?</label>
+                      <label>Do you have investments other than pension(s) (Stocks, Bonds, ETFs, Crypto)?</label>
                       <div className="radio-group">
                         <label>
                           <input
@@ -1416,7 +1416,7 @@ const Home = () => {
                       </div>
                     )}
                     <div className="form-group">
-                      <label>Do you have valuable assets (e.g., jewelry, art)?</label>
+                      <label>Do you have valuable assets (e.g., Jewelry, Art)?</label>
                       <div className="radio-group">
                         <label>
                           <input
@@ -1546,7 +1546,7 @@ const Home = () => {
                       />
                     </div>
                     <div className="form-group">
-                      <label>Do you receive rental income (net of any expenses for the rental property/properties)?</label>
+                      <label>Do you receive rental income (Net of any Expenses for the Rental Property/Properties)?</label>
                       <div className="radio-group">
                         <label>
                           <input
@@ -1568,7 +1568,7 @@ const Home = () => {
                     </div>
                     {receivesRentalIncome && (
                       <div className="form-group">
-                        <label>If yes, how much do you receive monthly (net of any expenses for the rental property/properties)?</label>
+                        <label>If yes, how much do you receive monthly (Net of any Expenses for the Rental Property/Properties)?</label>
                         <input
                           type="text"
                           placeholder="£ Enter amount"
@@ -1579,11 +1579,11 @@ const Home = () => {
                     )}
                     <>
                       <div className="form-group">
-                        <label>Total monthly fixed expenses ( utilities, insurance)?</label>
+                        <label>Total monthly fixed expenses ( Utilities, Insurance)?</label>
                         <div style={{ display: 'flex', alignItems: 'center' }}>
                           <input
                             type="text"
-                            placeholder="£ Enter amount"
+                            placeholder="£ Enter Amount"
                             value={monthlyFixedExpenses}
                             onChange={(e) => setMonthlyFixedExpenses(e.target.value)}
                           />
@@ -1601,14 +1601,14 @@ const Home = () => {
                         <div className="form-group" key={index}>
                           <input
                             type="text"
-                            placeholder="Expense name (e.g., food, fuel)"
+                            placeholder="Expense Name (e.g., Food, Fuel)"
                             value={expense.name}
                             onChange={(e) => handleExpenseChange(index, 'name', e.target.value)}
                             style={{ marginRight: '10px' }}
                           />
                           <input
                             type="text"
-                            placeholder="£ Enter amount"
+                            placeholder="£ Enter Amount"
                             value={expense.amount}
                             onChange={(e) => handleExpenseChange(index, 'amount', e.target.value)}
                           />
@@ -1641,14 +1641,14 @@ const Home = () => {
                         <div className="form-group" key={index}>
                           <input
                             type="text"
-                            placeholder="Expense name (e.g., groceries, transport)"
+                            placeholder="Expense Name (e.g., Groceries, Transport)"
                             value={expense.name}
                             onChange={(e) => handleVariableExpenseChange(index, 'name', e.target.value)}
                             style={{ marginRight: '10px' }}
                           />
                           <input
                             type="text"
-                            placeholder="£ Enter amount"
+                            placeholder="£ Enter Amount"
                             value={expense.amount}
                             onChange={(e) => handleVariableExpenseChange(index, 'amount', e.target.value)}
                           />
@@ -1696,7 +1696,7 @@ const Home = () => {
                       />
                     </div> */}
                     <div className="form-group">
-                      <label>Are you currently saving for any financial goals?</label>
+                      <label>Are you currently saving for any Financial Goals?</label>
                       <div className="radio-group">
                         <label>
                           <input
@@ -1722,16 +1722,16 @@ const Home = () => {
                           <label>Goal 1:</label>
                           <input
                             type="text"
-                            placeholder="Enter goal description"
+                            placeholder="Enter Goal Description"
                             value={savingsGoal1Description}
                             onChange={(e) => setSavingsGoal1Description(e.target.value)}
                           />
                         </div>
                         <div className="form-group">
-                          <label>Target amount:</label>
+                          <label>Target Amount:</label>
                           <input
                             type="text"
-                            placeholder="£ Enter amount"
+                            placeholder="£ Enter Amount"
                             value={savingsGoal1Amount}
                             onChange={(e) => setSavingsGoal1Amount(e.target.value)}
                           />
@@ -1750,15 +1750,15 @@ const Home = () => {
                           <div className="goal-2-container">
                             <div className="form-group "><label>Goal 2:</label>
                             <div className="dlt-btn d-flex gap-3 align-items-center">
-                            <input type="text" className='form-group1' placeholder="Enter goal description" value={savingsGoal2Description} onChange={(e) => setSavingsGoal2Description(e.target.value)} />
+                            <input type="text" className='form-group1' placeholder="Enter Goal Description" value={savingsGoal2Description} onChange={(e) => setSavingsGoal2Description(e.target.value)} />
                             {/* <button className="delete-button" onClick={() => setShowGoal2(false)}><i class="fa-solid fa-trash"></i></button> */}
                             </div>
                             </div>
                             <div className="form-group">
-                              <label>Target amount:</label>
+                              <label>Target Amount:</label>
                               <input
                                 type="text"
-                                placeholder="£ Enter amount"
+                                placeholder="£ Enter Amount"
                                 value={savingsGoal2Amount}
                                 onChange={(e) => setSavingsGoal2Amount(e.target.value)}
                               />
@@ -1781,7 +1781,7 @@ const Home = () => {
                       <label>How much do you contribute to savings each month?</label>
                       <input
                         type="text"
-                        placeholder="£ Enter amount"
+                        placeholder="£ Enter Amount"
                         value={monthlySavingsContribution}
                         onChange={(e) => setMonthlySavingsContribution(e.target.value)}
                       />
@@ -1827,7 +1827,7 @@ const Home = () => {
 
                   <div className={`form-section pt-4 pb-4 ${activeTab === 3 ? "active" : ""}`}>
                     <h2>Debt Management</h2>
-                    <p>Please provide information about your debt management strategy</p>
+                    <p>Please provide information about your Debt Management Strategy</p>
                     <div className="form-group">
                       <label>Do you have a mortgage?</label>
                       <div className="radio-group">
@@ -1855,7 +1855,7 @@ const Home = () => {
                           <label>Current mortgage balance</label>
                           <input
                             type="text"
-                            placeholder="£ Enter amount"
+                            placeholder="£ Enter Amount"
                             value={mortgageBalance}
                             onChange={(e) => setMortgageBalance(e.target.value)}
                           />
@@ -1864,7 +1864,7 @@ const Home = () => {
                           <label>Monthly mortgage payment</label>
                           <input
                             type="text"
-                            placeholder="£ Enter amount"
+                            placeholder="£ Enter Amount"
                             value={monthlyMortgagePayment}
                             onChange={(e) => setMonthlyMortgagePayment(e.target.value)}
                           />
@@ -1874,7 +1874,7 @@ const Home = () => {
                           <div className="input-group">
                             <input
                               type="text"
-                              placeholder="Enter percentage"
+                              placeholder="Enter Percentage"
                               value={mortgageInterestRate}
                               onChange={(e) => setMortgageInterestRate(e.target.value)}
                             />
@@ -1882,10 +1882,10 @@ const Home = () => {
                           </div>
                         </div>
                         <div className="form-group">
-                          <label>Years left on mortgage</label>
+                          <label>Years left on Mortgage</label>
                           <input
                             type="number"
-                            placeholder="Enter years"
+                            placeholder="Enter Years"
                             value={mortgageYearsLeft}
                             onChange={(e) => setMortgageYearsLeft(e.target.value)}
                           />
@@ -1893,7 +1893,7 @@ const Home = () => {
                       </>
                     )}
                     <div className="form-group">
-                      <label>Do you have other debts (credit cards, loans)?</label>
+                      <label>Do you have other Debts (Credit Cards, Loans)?</label>
                       <div className="radio-group">
                         <label>
                           <input
@@ -1916,26 +1916,26 @@ const Home = () => {
                     {hasOtherDebts && (
                       <>
                         <div className="form-group">
-                          <label>Total balance of other debts</label>
+                          <label>Total Balance of Other Debts</label>
                           <input
                             type="text"
-                            placeholder="£ Enter amount"
+                            placeholder="£ Enter Amount"
                             value={otherDebtBalance}
                             onChange={(e) => setOtherDebtBalance(e.target.value)}
                           />
                         </div>
                         <div className="form-group">
-                          <label>Monthly repayment for other debts</label>
+                          <label>Monthly Repayment for other Debts</label>
                           <input
                             type="text"
-                            placeholder="£ Enter amount"
+                            placeholder="£ Enter Amount"
                             value={monthlyDebtRepayment}
                             onChange={(e) => setMonthlyDebtRepayment(e.target.value)}
                           />
                         </div>
 
                         <div className="form-group">
-                          <label>Intersest Rate for other debts (%)</label>
+                          <label>Intersest Rate for other Debts (%)</label>
                           <input
                             type="text"
                             placeholder="Enter Interest Rate (%)"
@@ -1949,7 +1949,7 @@ const Home = () => {
                       <label>Credit Card balance?</label>
                       <input
                         type="text"
-                        placeholder="£ Enter amount"
+                        placeholder="£ Enter Amount"
                         value={creditCardBalance}
                         onChange={(e) => setCreditCardBalance(e.target.value)}
                       />
@@ -1958,7 +1958,7 @@ const Home = () => {
                       <label>Credit Card Interest Rate?</label>
                       <input
                         type="text"
-                        placeholder="Enter percentage (%)"
+                        placeholder="Enter Percentage (%)"
                         value={creditCardInterestRate}
                         onChange={(e) => setCreditCardInterestRate(e.target.value)}
                       />
@@ -1986,7 +1986,7 @@ const Home = () => {
                     <p>Please provide information about your retirement plans</p>
                     <div className="form-row">
                       <div className="form-group">
-                        <label>Do you have a workplace pension?</label>
+                        <label>Do you have a Workplace Pension?</label>
                         <div className="radio-group">
                           <label>
                             <input
@@ -2008,10 +2008,10 @@ const Home = () => {
                       </div>
                       {hasWorkplacePension && (
                         <div className="form-group">
-                          <label>If yes, what is your current pension balance?</label>
+                          <label>If yes, what is your Current Pension Balance?</label>
                           <input
                             type="text"
-                            placeholder="£ Enter amount"
+                            placeholder="£ Enter Amount"
                             value={pensionBalance}
                             onChange={(e) => setPensionBalance(e.target.value)}
                           />
@@ -2020,7 +2020,7 @@ const Home = () => {
                     </div>
                     <div className="form-row">
                       <div className="form-group">
-                        <label>Does your employer contribute to your workplace pension?</label>
+                        <label>Does your Employer Contribute to your Workplace Pension?</label>
                         <div className="radio-group">
                           <label>
                             <input
@@ -2042,10 +2042,10 @@ const Home = () => {
                       </div>
                       {employerMatchesPension && (
                         <div className="form-group">
-                          <label>How much are the total monthly contributions to your workplace pension?</label>
+                          <label>How much are the Total Monthly Contributions to your Workplace Pension?</label>
                           <input
                             type="text"
-                            placeholder="£ Enter amount"
+                            placeholder="£ Enter Amount"
                             value={monthlyPensionContribution}
                             onChange={(e) => setMonthlyPensionContribution(e.target.value)}
                           />
@@ -2054,7 +2054,7 @@ const Home = () => {
                     </div>
                     <div className="form-row">
                       <div className="form-group">
-                        <label>Do you have a private pension (SIPP, LISA, or other)?</label>
+                        <label>Do you have a Private Pension (SIPP, LISA, or Other)?</label>
                         <div className="radio-group">
                           <label>
                             <input
@@ -2077,10 +2077,10 @@ const Home = () => {
                     </div>
                     {hasPrivatePension && (
                       <div className="form-group">
-                        <label>How much are the total monthly contributions to your private pension?</label>
+                        <label>How much are the Total Monthly Contributions to your Private Pension?</label>
                         <input
                           type="text"
-                          placeholder="£ Enter amount"
+                          placeholder="£ Enter Amount"
                           value={privatePensionBalance}
                           onChange={(e) => setPrivatePensionBalance(e.target.value)}
                         />
@@ -2088,7 +2088,7 @@ const Home = () => {
                     )}
                     <div className="form-row">
                       <div className="form-group">
-                        <label>Do you plan to use property equity (downsizing, rental income) in retirement?</label>
+                        <label>Do you plan to use Property Equity (downsizing, rental income) in Retirement?</label>
                         <div className="radio-group">
                           <label>
                             <input
@@ -2109,10 +2109,10 @@ const Home = () => {
                         </div>
                       </div>
                       <div className="form-group">
-                        <label>At what age do you plan to retire?</label>
+                        <label>At what Age do you Plan to Retire?</label>
                         <input
                           type="text"
-                          placeholder="Enter age"
+                          placeholder="Enter Age"
                           value={plannedRetirementAge}
                           onChange={(e) => setPlannedRetirementAge(e.target.value)}
                         />
@@ -2137,10 +2137,10 @@ const Home = () => {
                 <div className="item-content">
                   <div className={`form-section ${activeTab === 5 ? "active" : ""}`}>
                     <h2>Tax Optimization</h2>
-                    <p>Please provide information about your tax planning strategies</p>
+                    <p>Please Provide Information about your Tax Planning Strategies</p>
                     <div className="form-row">
                       <div className="form-group full-width">
-                        <label>Do you contribute to tax-efficient investment accounts (Stocks & Shares ISA, Pension, LISA)?</label>
+                        <label>Do you Contribute to Tax-efficient Investment Accounts (Stocks & Shares ISA, Pension, LISA)?</label>
                         <div className="radio-group">
                           <label>
                             <input
@@ -2163,7 +2163,7 @@ const Home = () => {
                     </div>
                     <div className="form-row">
                       <div className="form-group full-width">
-                        <label>Have you maxed out your annual ISA allowance?</label>
+                        <label>Have you Maxed out your Annual ISA Allowance?</label>
                         <div className="radio-group">
                           <label>
                             <input
@@ -2186,7 +2186,7 @@ const Home = () => {
                     </div>
                     <div className="form-row">
                       <div className="form-group full-width">
-                        <label>Do you track your capital gains for tax purposes?</label>
+                        <label>Do you Track your Capital Gains for Tax Purposes?</label>
                         <div className="radio-group">
                           <label>
                             <input
@@ -2209,7 +2209,7 @@ const Home = () => {
                     </div>
                     <div className="form-row">
                       <div className="form-group full-width">
-                        <label>Do you donate to charity and claim tax relief (Gift Aid)?</label>
+                        <label>Do you Donate to Charity and Claim Tax Relief (Gift Aid)?</label>
                         <div className="radio-group">
                           <label>
                             <input
@@ -2252,10 +2252,10 @@ const Home = () => {
 
                   <div className={`form-section ${activeTab === 6 ? "active" : ""}`}>
                     <h2>Financial Education & Planning Preferences</h2>
-                    <p>Please provide information about your financial education needs</p>
+                    <p>Please Provide Information About your Financial Education Needs</p>
                     <div className="form-row">
                       <div className="form-group full-width">
-                        <label>What financial topics do you need the most help with? (Select all that apply)</label>
+                        <label>What Financial Topics do you Need the Most Help With? (Select all that apply)</label>
                         <div className="checkbox-group">
                           <label>
                             <input
@@ -2310,7 +2310,7 @@ const Home = () => {
                     </div>
                     <div className="form-row">
                       <div className="form-group half-width">
-                        <label>Do you currently use financial tools/apps to track your finances?</label>
+                        <label>Do you Currently use Financial Tools/Apps to Track your Finances?</label>
                         <div className="radio-group">
                           <label>
                             <input
@@ -2332,10 +2332,10 @@ const Home = () => {
                       </div>
                       {usesFinancialTools && (
                         <div className="form-group half-width">
-                          <label>If yes, which one(s)?</label>
+                          <label>If Yes, Which One(s)?</label>
                           <input
                             type="text"
-                            placeholder="Enter tools/apps"
+                            placeholder="Enter Tools/Apps"
                             value={financialTools}
                             onChange={(e) => setFinancialTools(e.target.value)}
                           />
@@ -2344,7 +2344,7 @@ const Home = () => {
                     </div>
                     <div className="form-row">
                       <div className="form-group full-width">
-                        <label>Would you be interested in a personalized financial plan based on this data?</label>
+                        <label>Would you be Interested in a Personalized Financial Plan Based on this Data?</label>
                         <div className="radio-group">
                           <label>
                             <input
@@ -2389,7 +2389,7 @@ const Home = () => {
                     </div>
                     <h2>Thank You for Completing Your Financial Assessment!</h2>
                     <p>
-                      Your information has been submitted successfully. Our financial advisors will review your data and contact you shortly with personalized recommendations.
+                      Your Information has been Submitted Successfully. Our Financial Advisors will Review your Data and Contact you Shortly with Personalized Recommendations.
                     </p>
                     <button className="btn-start" onClick={handleSubmit} disabled={loading}>
                       {loading ? "Submitting..." : "View Summary"}

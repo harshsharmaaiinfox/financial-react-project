@@ -857,7 +857,7 @@ const TabbedContent = () => {
                                 </div>
                             </div>
                             <div className="form-group">
-                                <label>Do you have investments (stocks, bonds, ETFs, crypto)?</label>
+                                <label>Do you have investments (Stocks, Bonds, ETFs, Crypto)?</label>
                                 <div className="radio-group">
                                     <label>
                                         <input

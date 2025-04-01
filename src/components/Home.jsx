@@ -2331,7 +2331,7 @@ const Home = () => {
 
             <div className="report-footer">
               <p>Prepared by: Financial Assessment Team</p>
-              <p>Contact: support@financeapp.com | © {new Date().getFullYear()} FinanceApp</p>
+              <p>Contact: support@Agenticmoney.com | © {new Date().getFullYear()} Agenticmoney</p>
             </div>
           </div>
         )}

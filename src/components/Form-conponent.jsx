@@ -110,10 +110,10 @@ const TabbedContent = () => {
     const [investmentAllocationPercentage, setInvestmentAllocationPercentage] = useState("");
     const [investmentRiskComfort, setInvestmentRiskComfort] = useState("");
     const [hasMortgage, setHasMortgage] = useState(false);
-    const [mortgageBalance, setMortgageBalance] = useState("");
+    const [MortgageBalance, setMortgageBalance] = useState("");
     const [monthlyMortgagePayment, setMonthlyMortgagePayment] = useState("");
-    const [mortgageInterestRate, setMortgageInterestRate] = useState("");
-    const [mortgageYearsLeft, setMortgageYearsLeft] = useState("");
+    const [MortgageInterestRate, setMortgageInterestRate] = useState("");
+    const [MortgageYearsLeft, setMortgageYearsLeft] = useState("");
     const [hasOtherDebts, setHasOtherDebts] = useState(false);
     const [otherDebtBalance, setOtherDebtBalance] = useState("");
     const [monthlyDebtRepayment, setMonthlyDebtRepayment] = useState("");
@@ -140,7 +140,7 @@ const TabbedContent = () => {
     const [queryError, setQueryError] = useState("");
     const [insights, setInsights] = useState(null);
     const [stepsInsights, setStepsInsights] = useState(null);
-    const [mortgageYearsLeftError, setMortgageYearsLeftError] = useState("");
+    const [MortgageYearsLeftError, setMortgageYearsLeftError] = useState("");
     const [plannedRetirementAgeError, setPlannedRetirementAgeError] = useState("");
     const [creditCardBalance, setCreditCardBalance] = useState("");
     const [creditCardInterestRate, setCreditCardInterestRate] = useState("");
@@ -254,11 +254,11 @@ const TabbedContent = () => {
             investments_value: parseFloat(investmentsValue) || 0,
             has_valuable_assets: hasValuableAssets,
             valuable_assets_value: parseFloat(valuableAssetsValue) || 0,
-            has_mortgage: hasMortgage,
-            mortgage_balance: parseFloat(mortgageBalance) || 0,
-            monthly_mortgage_payment: parseFloat(monthlyMortgagePayment) || 0,
-            mortgage_interest_rate: parseFloat(mortgageInterestRate) || 0,
-            mortgage_years_left: parseInt(mortgageYearsLeft) || 0,
+            has_Mortgage: hasMortgage,
+            Mortgage_balance: parseFloat(MortgageBalance) || 0,
+            monthly_Mortgage_payment: parseFloat(monthlyMortgagePayment) || 0,
+            Mortgage_interest_rate: parseFloat(MortgageInterestRate) || 0,
+            Mortgage_years_left: parseInt(MortgageYearsLeft) || 0,
             has_other_debts: hasOtherDebts,
             // other_debt_balance: parseFloat(otherDebtBalance) || 0,
             monthly_debt_repayment: parseFloat(monthlyDebtRepayment) || 0,
@@ -278,7 +278,7 @@ const TabbedContent = () => {
             investment_allocation_percentage: parseFloat(investmentAllocationPercentage) || 0,
             investment_risk_comfort: investmentRiskComfort,
             // monthly_debt_repayment_total: parseFloat(monthlyDebtRepaymentTotal) || 0,
-            plans_to_pay_off_mortgage_early: plansToPayOffMortgageEarly,
+            plans_to_pay_off_Mortgage_early: plansToPayOffMortgageEarly,
             has_workplace_pension: hasWorkplacePension,
             pension_balance: parseFloat(pensionBalance) || 0,
             monthly_pension_contribution: parseFloat(monthlyPensionContribution) || 0,
@@ -341,11 +341,11 @@ const TabbedContent = () => {
             investments_value: parseFloat(investmentsValue) || 0,
             has_valuable_assets: hasValuableAssets,
             valuable_assets_value: parseFloat(valuableAssetsValue) || 0,
-            has_mortgage: hasMortgage,
-            mortgage_balance: parseFloat(mortgageBalance) || 0,
-            monthly_mortgage_payment: parseFloat(monthlyMortgagePayment) || 0,
-            mortgage_interest_rate: parseFloat(mortgageInterestRate) || 0,
-            mortgage_years_left: parseInt(mortgageYearsLeft) || 0,
+            has_Mortgage: hasMortgage,
+            Mortgage_balance: parseFloat(MortgageBalance) || 0,
+            monthly_Mortgage_payment: parseFloat(monthlyMortgagePayment) || 0,
+            Mortgage_interest_rate: parseFloat(MortgageInterestRate) || 0,
+            Mortgage_years_left: parseInt(MortgageYearsLeft) || 0,
             has_other_debts: hasOtherDebts,
             // other_debt_balance: parseFloat(otherDebtBalance) || 0,
             monthly_debt_repayment: parseFloat(monthlyDebtRepayment) || 0,
@@ -365,7 +365,7 @@ const TabbedContent = () => {
             investment_allocation_percentage: parseFloat(investmentAllocationPercentage) || 0,
             investment_risk_comfort: investmentRiskComfort,
             // monthly_debt_repayment_total: parseFloat(monthlyDebtRepaymentTotal) || 0,
-            plans_to_pay_off_mortgage_early: plansToPayOffMortgageEarly,
+            plans_to_pay_off_Mortgage_early: plansToPayOffMortgageEarly,
             has_workplace_pension: hasWorkplacePension,
             pension_balance: parseFloat(pensionBalance) || 0,
             monthly_pension_contribution: parseFloat(monthlyPensionContribution) || 0,
@@ -583,7 +583,7 @@ const TabbedContent = () => {
         datasets: [
             {
                 label: "Amount (£)",
-                data: [insights?.debt?.mortgage_balance ?? 0, insights?.debt?.monthly_mortgage_payment ?? 0],
+                data: [insights?.debt?.Mortgage_balance ?? 0, insights?.debt?.monthly_Mortgage_payment ?? 0],
                 backgroundColor: [colors.blue, colors.red],
             },
         ],
@@ -643,7 +643,7 @@ const TabbedContent = () => {
         datasets: [
             {
                 data: [
-                    insights?.cash_flow?.expenses?.monthly_fixed_expenses ?? 0, // Includes mortgage
+                    insights?.cash_flow?.expenses?.monthly_fixed_expenses ?? 0, // Includes Mortgage
                     insights?.cash_flow?.expenses?.monthly_variable_expenses ?? 0,
                     insights?.cash_flow?.expenses?.monthly_savings_contribution ?? 0,
                     insights?.cash_flow?.expenses?.monthly_pension_contribution ?? 0,
@@ -705,7 +705,7 @@ const TabbedContent = () => {
             },
             {
                 label: "Mortgage",
-                data: [-(insights?.net_worth?.liabilities?.mortgage_balance ?? 0)],
+                data: [-(insights?.net_worth?.liabilities?.Mortgage_balance ?? 0)],
                 backgroundColor: colors.purple,
             },
             {
@@ -769,7 +769,7 @@ const TabbedContent = () => {
                                 <label>Total bank accounts savings?</label>
                                 <input
                                     type="text"
-                                    placeholder="£ Enter amount"
+                                    placeholder="£ Enter Amount"
                                     value={bankSavings}
                                     onChange={(e) => setBankSavings(e.target.value)}
                                 />
@@ -778,7 +778,7 @@ const TabbedContent = () => {
                                 <label>Total ISAs savings?</label>
                                 <input
                                     type="text"
-                                    placeholder="£ Enter amount"
+                                    placeholder="£ Enter Amount"
                                     value={iasSavings}
                                     onChange={(e) => setIasSavings(e.target.value)}
                                 />
@@ -787,7 +787,7 @@ const TabbedContent = () => {
                                 <label>Total emergency fund savings?</label>
                                 <input
                                     type="text"
-                                    placeholder="£ Enter amount"
+                                    placeholder="£ Enter Amount"
                                     value={emergencySavings}
                                     onChange={(e) => setEmergencySavings(e.target.value)}
                                 />
@@ -828,7 +828,7 @@ const TabbedContent = () => {
                                         <label>Estimated market value of property/properties</label>
                                         <input
                                             type="text"
-                                            placeholder="£ Enter amount"
+                                            placeholder="£ Enter Amount"
                                             value={primaryResidenceValue}
                                             onChange={(e) => setPrimaryResidenceValue(e.target.value)}
                                         />
@@ -882,7 +882,7 @@ const TabbedContent = () => {
                                     <label>Total estimated value of investments</label>
                                     <input
                                         type="text"
-                                        placeholder="£ Enter amount"
+                                        placeholder="£ Enter Amount"
                                         value={investmentsValue}
                                         onChange={(e) => setInvestmentsValue(e.target.value)}
                                     />
@@ -914,7 +914,7 @@ const TabbedContent = () => {
                                     <label>Total estimated value of valuable assets</label>
                                     <input
                                         type="text"
-                                        placeholder="£ Enter amount"
+                                        placeholder="£ Enter Amount"
                                         value={valuableAssetsValue}
                                         onChange={(e) => setValuableAssetsValue(e.target.value)}
                                     />
@@ -924,7 +924,7 @@ const TabbedContent = () => {
                                 <label>Credit Card balance?</label>
                                 <input
                                     type="text"
-                                    placeholder="£ Enter amount"
+                                    placeholder="£ Enter Amount"
                                     value={creditCardBalance}
                                     onChange={(e) => setCreditCardBalance(e.target.value)}
                                 />
@@ -1027,7 +1027,7 @@ const TabbedContent = () => {
                                 <label>Total salary?</label>
                                 <input
                                     type="text"
-                                    placeholder="£ Enter amount"
+                                    placeholder="£ Enter Amount"
                                     value={monthlyIncome}
                                     onChange={(e) => setMonthlyIncome(e.target.value)}
                                 />
@@ -1058,17 +1058,17 @@ const TabbedContent = () => {
                                     <label>If yes, how much do you receive monthly?</label>
                                     <input
                                         type="text"
-                                        placeholder="£ Enter amount"
+                                        placeholder="£ Enter Amount"
                                         value={monthlyRentalIncome}
                                         onChange={(e) => setMonthlyRentalIncome(e.target.value)}
                                     />
                                 </div>
                             )}
                             <div className="form-group">
-                                <label>Total monthly fixed expenses (mortgage/rent, utilities, insurance)?</label>
+                                <label>Total monthly fixed expenses (Mortgage/rent, utilities, insurance)?</label>
                                 <input
                                     type="text"
-                                    placeholder="£ Enter amount"
+                                    placeholder="£ Enter Amount"
                                     value={monthlyFixedExpenses}
                                     onChange={(e) => setMonthlyFixedExpenses(e.target.value)}
                                 />
@@ -1077,7 +1077,7 @@ const TabbedContent = () => {
                                 <label>Total monthly variable expenses (groceries, dining, transport, entertainment)?</label>
                                 <input
                                     type="text"
-                                    placeholder="£ Enter amount"
+                                    placeholder="£ Enter Amount"
                                     value={monthlyVariableExpenses}
                                     onChange={(e) => setMonthlyVariableExpenses(e.target.value)}
                                 />
@@ -1105,7 +1105,7 @@ const TabbedContent = () => {
                                 <label>How much do you have saved in an emergency fund?</label>
                                 <input
                                     type="text"
-                                    placeholder="£ Enter amount"
+                                    placeholder="£ Enter Amount"
                                     value={emergencyFund}
                                     onChange={(e) => setEmergencyFund(e.target.value)}
                                 />
@@ -1155,7 +1155,7 @@ const TabbedContent = () => {
                                         <label>Target amount:</label>
                                         <input
                                             type="text"
-                                            placeholder="£ Enter amount"
+                                            placeholder="£ Enter Amount"
                                             value={savingsGoal1Amount}
                                             onChange={(e) => setSavingsGoal1Amount(e.target.value)}
                                         />
@@ -1166,7 +1166,7 @@ const TabbedContent = () => {
                                 <label>How much do you contribute to savings each month?</label>
                                 <input
                                     type="text"
-                                    placeholder="£ Enter amount"
+                                    placeholder="£ Enter Amount"
                                     value={monthlySavingsContribution}
                                     onChange={(e) => setMonthlySavingsContribution(e.target.value)}
                                 />
@@ -1290,7 +1290,7 @@ const TabbedContent = () => {
                             <h2>Debt Management</h2>
                             <p>Please provide information about your debt management strategy</p>
                             <div className="form-group">
-                                <label>Do you have a mortgage?</label>
+                                <label>Do you have a Mortgage?</label>
                                 <div className="radio-group">
                                     <label>
                                         <input
@@ -1313,19 +1313,19 @@ const TabbedContent = () => {
                             {hasMortgage && (
                                 <>
                                     <div className="form-group">
-                                        <label>Current mortgage balance</label>
+                                        <label>Current Mortgage balance</label>
                                         <input
                                             type="text"
-                                            placeholder="£ Enter amount"
-                                            value={mortgageBalance}
+                                            placeholder="£ Enter Amount"
+                                            value={MortgageBalance}
                                             onChange={(e) => setMortgageBalance(e.target.value)}
                                         />
                                     </div>
                                     <div className="form-group">
-                                        <label>Monthly mortgage payment</label>
+                                        <label>Monthly Mortgage payment</label>
                                         <input
                                             type="text"
-                                            placeholder="£ Enter amount"
+                                            placeholder="£ Enter Amount"
                                             value={monthlyMortgagePayment}
                                             onChange={(e) => setMonthlyMortgagePayment(e.target.value)}
                                         />
@@ -1336,18 +1336,18 @@ const TabbedContent = () => {
                                             <input
                                                 type="text"
                                                 placeholder="Enter percentage"
-                                                value={mortgageInterestRate}
+                                                value={MortgageInterestRate}
                                                 onChange={(e) => setMortgageInterestRate(e.target.value)}
                                             />
                                             <span>%</span>
                                         </div>
                                     </div>
                                     <div className="form-group">
-                                        <label>Years left on mortgage</label>
+                                        <label>Years left on Mortgage</label>
                                         <input
                                             type="number"
                                             placeholder="Enter years"
-                                            value={mortgageYearsLeft}
+                                            value={MortgageYearsLeft}
                                             onChange={(e) => setMortgageYearsLeft(e.target.value)}
                                         />
                                     </div>
@@ -1380,7 +1380,7 @@ const TabbedContent = () => {
                                         <label>Total balance of other debts</label>
                                         <input
                                             type="text"
-                                            placeholder="£ Enter amount"
+                                            placeholder="£ Enter Amount"
                                             value={otherDebtBalance}
                                             onChange={(e) => setOtherDebtBalance(e.target.value)}
                                         />
@@ -1389,7 +1389,7 @@ const TabbedContent = () => {
                                         <label>Monthly repayment for other debts</label>
                                         <input
                                             type="text"
-                                            placeholder="£ Enter amount"
+                                            placeholder="£ Enter Amount"
                                             value={monthlyDebtRepayment}
                                             onChange={(e) => setMonthlyDebtRepayment(e.target.value)}
                                         />
@@ -1441,7 +1441,7 @@ const TabbedContent = () => {
                                         <label>If yes, what is your current pension balance?</label>
                                         <input
                                             type="text"
-                                            placeholder="£ Enter amount"
+                                            placeholder="£ Enter Amount"
                                             value={pensionBalance}
                                             onChange={(e) => setPensionBalance(e.target.value)}
                                         />
@@ -1475,7 +1475,7 @@ const TabbedContent = () => {
                                         <label>How much do you contribute monthly?</label>
                                         <input
                                             type="text"
-                                            placeholder="£ Enter amount"
+                                            placeholder="£ Enter Amount"
                                             value={monthlyPensionContribution}
                                             onChange={(e) => setMonthlyPensionContribution(e.target.value)}
                                         />

@@ -104,6 +104,9 @@ const Home = () => {
   const [keyword, setKeyword] = useState("");
   const [isResultVisible, setIsResultVisible] = useState(false);
   const [htmlDesign, setHtmlDesign] = useState("");
+  const [monthlyCreditCardPayment, setMonthlyCreditCardPayment] = useState("")
+
+  const [mortgages, setMortgages] = useState([]);
 
 
 
@@ -111,15 +114,37 @@ const Home = () => {
   const [additionalVariableExpenses, setAdditionalVariableExpenses] = useState([]);
   const [totalOtherMonthlyIncome, setTotalOtherMonthlyIncome] = useState("");
 
+  const [savingsGoals, setSavingsGoals] = useState([]);
+
+  const [showExpenseListText, setShowExpenseListText] = useState(false);
+  const [showAdditionalExpenseList,setShowAdditionalExpenseList] = useState(false);
+
 
 
   const addVariableExpenseField = () => {
     setAdditionalVariableExpenses(prev => [...prev, { name: '', amount: '' }]);
+    setShowAdditionalExpenseList(true);
   };
 
 
   const addExpenseField = () => {
     setAdditionalExpenses(prev => [...prev, { name: '', amount: '' }]);
+    setShowExpenseListText(true);
+  };
+
+  const addSavingsGoal = () => {
+    setSavingsGoals([...savingsGoals, {
+      description: '',
+      targetAmount: '',
+      targetYears: ''
+    }]);
+  };
+
+
+  const updateSavingsGoal = (index, field, value) => {
+    const updatedGoals = [...savingsGoals];
+    updatedGoals[index][field] = value;
+    setSavingsGoals(updatedGoals);
   };
 
 
@@ -134,6 +159,21 @@ const Home = () => {
       return newExpenses;
     });
   };
+  const addMortgage = () => {
+    setMortgages([...mortgages, {
+      mortgageBalance: '',
+      monthlymortgagePayment: '',
+      mortgageInterestRate: '',
+      mortgageYearsLeft: ''
+    }]);
+  };
+
+
+  const updateMortgage = (index, field, value) => {
+    const updatedMortgages = [...mortgages];
+    updatedMortgages[index][field] = value;
+    setMortgages(updatedMortgages);
+  };
 
 
   const handleAgeChange = (e) => {
@@ -146,10 +186,13 @@ const Home = () => {
       return;
     }
 
+
+
+
     // Convert to number and validate
     const numValue = parseInt(value);
     if (isNaN(numValue)) {
-      
+
       setAgeError('Please enter a valid number');
     } else if (numValue < 18) {
       setAgeError('Age must be at least 18');
@@ -263,42 +306,47 @@ const Home = () => {
 
     const formData = {
       id: id,
-      cash_savings: parseFloat(bankSavings) || 0 + parseFloat(iasSavings) || 0 + parseFloat(emergencySavings) || 0,
+      //cash_savings: parseFloat(bankSavings) || 0 + parseFloat(iasSavings) || 0 + parseFloat(emergencySavings) || 0,
+      bank_account_savings: parseFloat(bankSavings) || 0,
+      isa_savings: parseFloat(iasSavings) || 0,
       owns_real_estate: ownsRealEstate,
       num_properties: parseInt(numProperties) || 0,
       monthly_private_pension_contribution: parseFloat(privatePensionBalance) || 0,
       primary_residence_value: parseFloat(primaryResidenceValue) || 0,
       owns_investment_properties: ownsInvestmentProperties,
       has_investments: hasInvestments,
+      saving_goals: savingsGoals,
+      mortgages: mortgages,
       investments_value: parseFloat(investmentsValue) || 0,
       has_valuable_assets: hasValuableAssets,
       valuable_assets_value: parseFloat(valuableAssetsValue) || 0,
       has_mortgage: hasmortgage,
       total_other_monthly_income: totalOtherMonthlyIncome,
-      mortgage_balance: parseFloat(mortgageBalance) || 0,
-      monthly_mortgage_payment: parseFloat(monthlymortgagePayment) || 0,
-      mortgage_interest_rate: parseFloat(mortgageInterestRate) || 0,
-      mortgage_years_left: parseInt(mortgageYearsLeft) || 0,
+      // mortgage_balance: parseFloat(mortgageBalance) || 0,
+      // monthly_mortgage_payment: parseFloat(monthlymortgagePayment) || 0,
+      // mortgage_interest_rate: parseFloat(mortgageInterestRate) || 0,
+      // mortgage_years_left: parseInt(mortgageYearsLeft) || 0,
       has_other_debts: hasOtherDebts,
       debt_interest_rate: parseFloat(debtInterestRate) || 0,
       // other_debt_balance: parseFloat(otherDebtBalance) || 0,
+      monthly_credit_card_payment: parseFloat(monthlyCreditCardPayment) || 0,
       monthly_debt_repayment: parseFloat(monthlyDebtRepayment) || 0,
       monthly_income: parseFloat(monthlyIncome) || 0,
       receives_rental_income: receivesRentalIncome,
       monthly_rental_income: parseFloat(monthlyRentalIncome) || 0,
       monthly_fixed_expenses: parseFloat(monthlyFixedExpenses) || 0,
       monthly_variable_expenses: parseFloat(monthlyVariableExpenses) || 0,
-      emergency_fund: parseFloat(emergencyFund) || 0,
+      emergency_fund: parseFloat(emergencySavings) || 0,
       emergency_fund_coverage_months: parseInt(emergencyFundCoverageMonths) || 0,
       has_savings_goals: hasSavingsGoals,
       addition_variable_expenses: additionalVariableExpenses,
       additional_expenses: additionalExpenses,
-      savings_goal_1_description: savingsGoal1Description,
-      savings_goal_1_amount: parseFloat(savingsGoal1Amount) || 0,
-      savings_goal_2_description: savingsGoal2Description,
-      savings_goal_2_amount: parseFloat(savingsGoal2Amount) || 0,
-      savings_goal_1_target_years: parseInt(savingsGoal1Years) || 0,
-      savings_goal_2_target_years: parseInt(savingsGoal2Years) || 0,
+      // savings_goal_1_description: savingsGoal1Description,
+      // savings_goal_1_amount: parseFloat(savingsGoal1Amount) || 0,
+      // savings_goal_2_description: savingsGoal2Description,
+      // savings_goal_2_amount: parseFloat(savingsGoal2Amount) || 0,
+      // savings_goal_1_target_years: parseInt(savingsGoal1Years) || 0,
+      // savings_goal_2_target_years: parseInt(savingsGoal2Years) || 0,
       monthly_savings_contribution: parseFloat(monthlySavingsContribution) || 0,
       plans_to_buy_property: plansToBuyProperty,
       invests_in_financial_assets: investsInFinancialAssets,
@@ -376,12 +424,14 @@ const Home = () => {
       has_valuable_assets: hasValuableAssets,
       valuable_assets_value: parseFloat(valuableAssetsValue) || 0,
       has_mortgage: hasmortgage,
+      mortgages: mortgages,
       total_other_monthly_income: totalOtherMonthlyIncome,
       mortgage_balance: parseFloat(mortgageBalance) || 0,
       monthly_mortgage_payment: parseFloat(monthlymortgagePayment) || 0,
       mortgage_interest_rate: parseFloat(mortgageInterestRate) || 0,
       mortgage_years_left: parseInt(mortgageYearsLeft) || 0,
       has_other_debts: hasOtherDebts,
+      saving_goals: savingsGoals,
       // other_debt_balance: parseFloat(otherDebtBalance) || 0,
       monthly_debt_repayment: parseFloat(monthlyDebtRepayment) || 0,
       debt_interest_rate: parseFloat(debtInterestRate) || 0,
@@ -394,12 +444,12 @@ const Home = () => {
       emergency_fund_coverage_months: parseInt(emergencyFundCoverageMonths) || 0,
       monthly_private_pension_contribution: parseFloat(privatePensionBalance) || 0,
       has_savings_goals: hasSavingsGoals,
-      savings_goal_1_description: savingsGoal1Description,
-      savings_goal_1_amount: parseFloat(savingsGoal1Amount) || 0,
-      savings_goal_2_description: savingsGoal2Description,
-      savings_goal_2_amount: parseFloat(savingsGoal2Amount) || 0,
-      savings_goal_1_target_years: parseInt(savingsGoal1Years) || 0,
-      savings_goal_2_target_years: parseInt(savingsGoal2Years) || 0,
+      // savings_goal_1_description: savingsGoal1Description,
+      // savings_goal_1_amount: parseFloat(savingsGoal1Amount) || 0,
+      // savings_goal_2_description: savingsGoal2Description,
+      // savings_goal_2_amount: parseFloat(savingsGoal2Amount) || 0,
+      // savings_goal_1_target_years: parseInt(savingsGoal1Years) || 0,
+      // savings_goal_2_target_years: parseInt(savingsGoal2Years) || 0,
       monthly_savings_contribution: parseFloat(monthlySavingsContribution) || 0,
       plans_to_buy_property: plansToBuyProperty,
       invests_in_financial_assets: investsInFinancialAssets,
@@ -609,8 +659,8 @@ const Home = () => {
       {
         label: "Amount (£)",
         data: [
-          insights?.retirement?.pension_balance ?? 0,
-          insights?.retirement?.monthly_pension_contribution ?? 0,
+          insights?.recommendations?.insights?.retirement?.pension_balance ?? 0,
+          insights?.recommendations?.insights?.retirement?.monthly_pension_contribution ?? 0,
         ],
         backgroundColor: [colors.blue, colors.red],
       },
@@ -660,7 +710,7 @@ const Home = () => {
     datasets: [
       {
         label: "Amount (£)",
-        data: [insights?.debt?.mortgage_balance ?? 0, insights?.debt?.monthly_mortgage_payment ?? 0],
+        data: [insights?.recommendations?.insights?.debt?.mortgage_balance ?? 0, insights?.recommendations?.insights?.debt?.monthly_mortgage_payment ?? 0],
         backgroundColor: [colors.blue, colors.red],
       },
     ],
@@ -695,7 +745,7 @@ const Home = () => {
     datasets: [
       {
         label: "Amount (£)",
-        data: [insights?.cash_flow?.income ?? 0, insights?.cash_flow?.net ?? 0],
+        data: [insights?.recommendations?.insights?.cash_flow?.income ?? 0, insights?.recommendations?.insights?.cash_flow?.net ?? 0],
         backgroundColor: [colors.blue, colors.green],
       },
     ],
@@ -720,10 +770,10 @@ const Home = () => {
     datasets: [
       {
         data: [
-          insights?.cash_flow?.expenses?.monthly_fixed_expenses ?? 0, // Includes mortgage
-          insights?.cash_flow?.expenses?.monthly_variable_expenses ?? 0,
-          insights?.cash_flow?.expenses?.monthly_savings_contribution ?? 0,
-          insights?.cash_flow?.expenses?.monthly_pension_contribution ?? 0,
+          insights?.recommendations?.insights?.cash_flow?.expenses?.monthly_fixed_expenses ?? 0, // Includes mortgage
+          insights?.recommendations?.insights?.cash_flow?.expenses?.monthly_variable_expenses ?? 0,
+          insights?.recommendations?.insights?.cash_flow?.expenses?.monthly_savings_contribution ?? 0,
+          insights?.recommendations?.insights?.cash_flow?.expenses?.monthly_pension_contribution ?? 0,
         ],
         backgroundColor: [colors.red, colors.green, colors.yellow, colors.purple],
       },
@@ -762,37 +812,37 @@ const Home = () => {
     datasets: [
       {
         label: "Cash Savings",
-        data: [insights?.net_worth?.assets?.cash_savings ?? 0],
+        data: [insights?.recommendations?.insights?.net_worth?.assets?.cash_savings ?? 0],
         backgroundColor: colors.blue,
       },
       {
         label: "Primary Residence",
-        data: [insights?.net_worth?.assets?.primary_residence_value ?? 0],
+        data: [insights?.recommendations?.insights?.net_worth?.assets?.primary_residence_value ?? 0],
         backgroundColor: colors.red,
       },
       {
         label: "Investments",
-        data: [insights?.net_worth?.assets?.investments_value ?? 0],
+        data: [insights?.recommendations?.insights?.net_worth?.assets?.investments_value ?? 0],
         backgroundColor: colors.green,
       },
       {
         label: "Pension Balance",
-        data: [insights?.net_worth?.assets?.pension_balance ?? 0],
+        data: [insights?.recommendations?.insights?.net_worth?.assets?.pension_balance ?? 0],
         backgroundColor: colors.yellow,
       },
       {
         label: "mortgage",
-        data: [-(insights?.net_worth?.liabilities?.mortgage_balance ?? 0)],
+        data: [-(insights?.recommendations?.insights?.net_worth?.liabilities?.mortgage_balance ?? 0)],
         backgroundColor: colors.purple,
       },
       {
         label: "Credit Card",
-        data: [-(insights?.net_worth?.liabilities?.credit_card_balance ?? 0)],
+        data: [-(insights?.recommendations?.insights?.net_worth?.liabilities?.credit_card_balance ?? 0)],
         backgroundColor: colors.orange,
       },
       {
         label: "Personal Loan",
-        data: [-(insights?.net_worth?.liabilities?.personal_loan_balance ?? 0)],
+        data: [-(insights?.recommendations?.insights?.net_worth?.liabilities?.personal_loan_balance ?? 0)],
         backgroundColor: colors.cyan,
       },
     ],
@@ -809,8 +859,8 @@ const Home = () => {
     datasets: [
       {
         data: [
-          insights?.investments_savings?.cash_savings ?? 0,
-          insights?.investments_savings?.investments_value ?? 0,
+          insights?.recommendations?.insights?.investments_savings?.cash_savings ?? 0,
+          insights?.recommendations?.insights?.investments_savings?.investments_value ?? 0,
         ],
         backgroundColor: [colors.blue, colors.red],
       },
@@ -1329,6 +1379,16 @@ const Home = () => {
                     </div>
 
                     <div className="form-group">
+                      <label>Total emergency fund savings?</label>
+                      <input
+                        type="text"
+                        placeholder="£ Enter Amount"
+                        value={emergencySavings}
+                        onChange={(e) => setEmergencySavings(e.target.value)}
+                      />
+                    </div>
+
+                    <div className="form-group">
                       <label>Total bank accounts savings?</label>
                       <input
                         type="text"
@@ -1346,15 +1406,7 @@ const Home = () => {
                         onChange={(e) => setIasSavings(e.target.value)}
                       />
                     </div>
-                    <div className="form-group">
-                      <label>Total emergency fund savings?</label>
-                      <input
-                        type="text"
-                        placeholder="£ Enter Amount"
-                        value={emergencySavings}
-                        onChange={(e) => setEmergencySavings(e.target.value)}
-                      />
-                    </div>
+
                     <div className="form-group">
                       <label>Do you own any Real Estate Properties?</label>
                       <div className="radio-group">
@@ -1484,7 +1536,167 @@ const Home = () => {
                       </div>
                     )}
 
+                    <div className="nav-buttons d-flex justify-content-between">
+                      <a href="#Form-Main">
+                        <button className="btn-next" onClick={(e) => { e.stopPropagation(); showTab(1); }}>
+                          Income & Expenses →
+                        </button>
+                      </a>
+                      <button className="btn-next" onClick={(e) => { handleSubmitSteps(); }}>
+                        Generate
+                      </button>
+                    </div>
+                  </div>
 
+                </div>
+              </section>
+              <section id="tab2" className={activeTab === 1 ? "activeTab item active" : "inactiveTab item "} onClick={() => { showTab(1); }} data-title="Income & Expenses"  >
+                <div className="item-content">
+
+                  <div className={`form-section ${activeTab === 1 ? "active" : ""}`}>
+                    <h2>Income & Expenses (Budgeting & Cash Flow)</h2>
+                    <p>Please provide information about your income and expenses</p>
+                    <div className="form-group">
+                      <label>Total salary after taxes and other deductions?</label>
+                      <input
+                        type="text"
+                        placeholder="£ Enter Amount"
+                        value={monthlyIncome}
+                        onChange={(e) => setMonthlyIncome(e.target.value)}
+                      />
+                    </div>
+
+
+                    <div className="form-group">
+                      <label>Do you receive Rental Income (Net of any Expenses for the Rental Property/Properties)?</label>
+                      <div className="radio-group">
+                        <label>
+                          <input
+                            type="radio"
+                            value="Yes"
+                            checked={receivesRentalIncome === true}
+                            onChange={() => setReceivesRentalIncome(true)}
+                          /> Yes
+                        </label>
+                        <label>
+                          <input
+                            type="radio"
+                            value="No"
+                            checked={receivesRentalIncome === false}
+                            onChange={() => setReceivesRentalIncome(false)}
+                          /> No
+                        </label>
+                      </div>
+                    </div>
+                    {receivesRentalIncome && (
+                      <div className="form-group">
+                        <label>If yes, how much do you Receive Monthly (Net of any Expenses for the Rental Property/Properties)?</label>
+                        <input
+                          type="text"
+                          placeholder="£ Enter Amount"
+                          value={monthlyRentalIncome}
+                          onChange={(e) => setMonthlyRentalIncome(e.target.value)}
+                        />
+                      </div>
+                    )}
+                    <div className="form-group">
+                      <label>Total other Monthly Income?</label>
+                      <input
+                        type="text"
+                        placeholder="£ Enter Amount"
+                        value={totalOtherMonthlyIncome}
+                        onChange={(e) => setTotalOtherMonthlyIncome(e.target.value)}
+                      />
+                    </div>
+                    <>
+                      <div className="form-group">
+                        <label>Total Monthly Fixed Expenses ( Utilities, Insurance)?</label>
+                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                          <input
+                            type="text"
+                            placeholder="£ Enter Amount"
+                            value={monthlyFixedExpenses}
+                            onChange={(e) => setMonthlyFixedExpenses(e.target.value)}
+                          />
+                          <button
+                            onClick={addExpenseField}
+                            style={{ marginLeft: '10px', padding: '5px 10px' }}
+                          >
+                            +
+                          </button>
+                        </div>
+                      </div>
+
+                      {showExpenseListText && (
+                        <p style={{ margin: '10px 0' }}>
+                          List the key expenses this is made up of…
+                        </p>
+                      )}
+
+                      {/* Render additional expense fields */}
+                      {additionalExpenses.map((expense, index) => (
+                        <div className="form-group my-group" key={index}>
+                          <input
+                            type="text"
+                            placeholder="Expense Name (e.g., Rent, Council Tax,TV Licence,Insurance Premiums , Childcare Fees or School Fees ,Season Ticket or Travel Pass  etc.)"
+                            value={expense.name}
+                            onChange={(e) => handleExpenseChange(index, 'name', e.target.value)}
+                            style={{ marginRight: '10px' }}
+                          />
+                          <input
+                            type="text"
+                            placeholder="£ Enter Amount"
+                            value={expense.amount}
+                            onChange={(e) => handleExpenseChange(index, 'amount', e.target.value)}
+                          />
+                        </div>
+                      ))}
+                    </>
+                    <>
+                      {/* Your previous fixed expenses code here */}
+
+                      <div className="form-group">
+                        <label>Total Monthly Variable Expenses (Groceries, Dining, Transport, Entertainment)?</label>
+                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                          <input
+                            type="text"
+                            placeholder="£ Enter Amount"
+                            value={monthlyVariableExpenses}
+                            onChange={(e) => setMonthlyVariableExpenses(e.target.value)}
+                          />
+                          <button
+                            onClick={addVariableExpenseField}
+                            style={{ marginLeft: '10px', padding: '5px 10px' }}
+                          >
+                            +
+                          </button>
+                        </div>
+                      </div>
+                      {showAdditionalExpenseList && (
+                        <p style={{ margin: '10px 0' }}>
+                          List the key expenses this is made up of…
+                        </p>
+                      )}
+
+                      {/* Render additional variable expense fields */}
+                      {additionalVariableExpenses.map((expense, index) => (
+                        <div className="form-group my-group" key={index}>
+                          <input
+                            type="text"
+                            placeholder="Expense Name (e.g., Groceries & Household Supplies , Dining Out & Takeaways ,Clothing & Footwear ,Entertainment & Leisure etc.)"
+                            value={expense.name}
+                            onChange={(e) => handleVariableExpenseChange(index, 'name', e.target.value)}
+                            style={{ marginRight: '10px' }}
+                          />
+                          <input
+                            type="text"
+                            placeholder="£ Enter Amount"
+                            value={expense.amount}
+                            onChange={(e) => handleVariableExpenseChange(index, 'amount', e.target.value)}
+                          />
+                        </div>
+                      ))}
+                    </>
                     <div className="form-group">
                       <label>Do you currently invest in Stocks, Bonds, or Other Financial Assets?</label>
                       <div className="radio-group">
@@ -1510,7 +1722,7 @@ const Home = () => {
                     {investsInFinancialAssets && (
                       <>
                         <div className="form-group">
-                          <label>What percentage of your income do you allocate to investments?</label>
+                          <label>How much of your income do you allocate to investments?</label>
                           <div className="input-group">
                             <input
                               type="text"
@@ -1553,156 +1765,6 @@ const Home = () => {
                       </>
                     )}
 
-
-                    <div className="nav-buttons d-flex justify-content-between">
-                      <a href="#Form-Main">
-                        <button className="btn-next" onClick={(e) => { e.stopPropagation(); showTab(1); }}>
-                          Income & Expenses →
-                        </button>
-                      </a>
-                      <button className="btn-next" onClick={(e) => { handleSubmitSteps(); }}>
-                        Generate
-                      </button>
-                    </div>
-                  </div>
-
-                </div>
-              </section>
-              <section id="tab2" className={activeTab === 1 ? "activeTab item active" : "inactiveTab item "} onClick={() => { showTab(1); }} data-title="Income & Expenses"  >
-                <div className="item-content">
-
-                  <div className={`form-section ${activeTab === 1 ? "active" : ""}`}>
-                    <h2>Income & Expenses (Budgeting & Cash Flow)</h2>
-                    <p>Please provide information about your income and expenses</p>
-                    <div className="form-group">
-                      <label>Total salary after taxes and other deductions?</label>
-                      <input
-                        type="text"
-                        placeholder="£ Enter Amount"
-                        value={monthlyIncome}
-                        onChange={(e) => setMonthlyIncome(e.target.value)}
-                      />
-                    </div>
-
-                    <div className="form-group">
-                      <label>Total other Monthly Income?</label>
-                      <input
-                        type="text"
-                        placeholder="£ Enter Amount"
-                        value={totalOtherMonthlyIncome}
-                        onChange={(e) => setTotalOtherMonthlyIncome(e.target.value)}
-                      />
-                    </div>
-                    <div className="form-group">
-                      <label>Do you receive Rental Income (Net of any Expenses for the Rental Property/Properties)?</label>
-                      <div className="radio-group">
-                        <label>
-                          <input
-                            type="radio"
-                            value="Yes"
-                            checked={receivesRentalIncome === true}
-                            onChange={() => setReceivesRentalIncome(true)}
-                          /> Yes
-                        </label>
-                        <label>
-                          <input
-                            type="radio"
-                            value="No"
-                            checked={receivesRentalIncome === false}
-                            onChange={() => setReceivesRentalIncome(false)}
-                          /> No
-                        </label>
-                      </div>
-                    </div>
-                    {receivesRentalIncome && (
-                      <div className="form-group">
-                        <label>If yes, how much do you Receive Monthly (Net of any Expenses for the Rental Property/Properties)?</label>
-                        <input
-                          type="text"
-                          placeholder="£ Enter Amount"
-                          value={monthlyRentalIncome}
-                          onChange={(e) => setMonthlyRentalIncome(e.target.value)}
-                        />
-                      </div>
-                    )}
-                    <>
-                      <div className="form-group">
-                        <label>Total Monthly Fixed Expenses ( Utilities, Insurance)?</label>
-                        <div style={{ display: 'flex', alignItems: 'center' }}>
-                          <input
-                            type="text"
-                            placeholder="£ Enter Amount"
-                            value={monthlyFixedExpenses}
-                            onChange={(e) => setMonthlyFixedExpenses(e.target.value)}
-                          />
-                          <button
-                            onClick={addExpenseField}
-                            style={{ marginLeft: '10px', padding: '5px 10px' }}
-                          >
-                            +
-                          </button>
-                        </div>
-                      </div>
-
-                      {/* Render additional expense fields */}
-                      {additionalExpenses.map((expense, index) => (
-                        <div className="form-group my-group" key={index}>
-                          <input
-                            type="text"
-                            placeholder="Expense Name (e.g., Food, Fuel)"
-                            value={expense.name}
-                            onChange={(e) => handleExpenseChange(index, 'name', e.target.value)}
-                            style={{ marginRight: '10px' }}
-                          />
-                          <input
-                            type="text"
-                            placeholder="£ Enter Amount"
-                            value={expense.amount}
-                            onChange={(e) => handleExpenseChange(index, 'amount', e.target.value)}
-                          />
-                        </div>
-                      ))}
-                    </>
-                    <>
-                      {/* Your previous fixed expenses code here */}
-
-                      <div className="form-group">
-                        <label>Total Monthly Variable Expenses (Groceries, Dining, Transport, Entertainment)?</label>
-                        <div style={{ display: 'flex', alignItems: 'center' }}>
-                          <input
-                            type="text"
-                            placeholder="£ Enter Amount"
-                            value={monthlyVariableExpenses}
-                            onChange={(e) => setMonthlyVariableExpenses(e.target.value)}
-                          />
-                          <button
-                            onClick={addVariableExpenseField}
-                            style={{ marginLeft: '10px', padding: '5px 10px' }}
-                          >
-                            +
-                          </button>
-                        </div>
-                      </div>
-
-                      {/* Render additional variable expense fields */}
-                      {additionalVariableExpenses.map((expense, index) => (
-                        <div className="form-group my-group" key={index}>
-                          <input
-                            type="text"
-                            placeholder="Expense Name (e.g., Groceries, Transport)"
-                            value={expense.name}
-                            onChange={(e) => handleVariableExpenseChange(index, 'name', e.target.value)}
-                            style={{ marginRight: '10px' }}
-                          />
-                          <input
-                            type="text"
-                            placeholder="£ Enter Amount"
-                            value={expense.amount}
-                            onChange={(e) => handleVariableExpenseChange(index, 'amount', e.target.value)}
-                          />
-                        </div>
-                      ))}
-                    </>
                     <div className="nav-buttons">
                       <a href="#Form-Main">
                         <button className="btn-back" onClick={(e) => { e.stopPropagation(); showTab(0) }}>
@@ -1747,90 +1809,81 @@ const Home = () => {
                         onChange={(e) => setEmergencyFundCoverageMonths(e.target.value)}
                       />
                     </div> */}
-                    <div className="form-group">
-                      <label>Are you currently saving for any Financial Goals?</label>
-                      <div className="radio-group">
-                        <label>
-                          <input
-                            type="radio"
-                            value="Yes"
-                            checked={hasSavingsGoals === true}
-                            onChange={() => setHasSavingsGoals(true)}
-                          /> Yes
-                        </label>
-                        <label>
-                          <input
-                            type="radio"
-                            value="No"
-                            checked={hasSavingsGoals === false}
-                            onChange={() => setHasSavingsGoals(false)}
-                          /> No
-                        </label>
+
+                    <div>
+                      <div className="form-group">
+                        <label>Are you currently saving for any Financial Goals?</label>
+                        <div className="radio-group">
+                          <label>
+                            <input
+                              type="radio"
+                              value="Yes"
+                              checked={savingsGoals.length > 0}
+                              onChange={() => {
+                                if (savingsGoals.length === 0) addSavingsGoal();
+                              }}
+                            /> Yes
+                          </label>
+                          <label>
+                            <input
+                              type="radio"
+                              value="No"
+                              checked={savingsGoals.length === 0}
+                              onChange={() => setSavingsGoals([])}
+                            /> No
+                          </label>
+                          {/* Add button appears when "Yes" is selected */}
+                          
+                        </div>
                       </div>
-                    </div>
-                    {hasSavingsGoals && (
-                      <>
-                        <div className="form-group">
-                          <label>Goal 1:</label>
-                          <input
-                            type="text"
-                            placeholder="Enter Goal Description"
-                            value={savingsGoal1Description}
-                            onChange={(e) => setSavingsGoal1Description(e.target.value)}
-                          />
-                        </div>
-                        <div className="form-group">
-                          <label>Target Amount:</label>
-                          <input
-                            type="text"
-                            placeholder="£ Enter Amount"
-                            value={savingsGoal1Amount}
-                            onChange={(e) => setSavingsGoal1Amount(e.target.value)}
-                          />
-                        </div>
-                        <div className="form-group">
-                          <label>Target Years:</label>
-                          <input
-                            type="text"
-                            placeholder="Enter Years"
-                            value={savingsGoal1Years}
-                            onChange={(e) => setSavingsGoal1Years(e.target.value)}
-                          />
-                        </div>
 
-                        {showGoal2 && (
-                          <div className="goal-2-container">
-                            <div className="form-group "><label>Goal 2:</label>
-                              <div className="dlt-btn d-flex gap-3 align-items-center">
-                                <input type="text" className='form-group1' placeholder="Enter Goal Description" value={savingsGoal2Description} onChange={(e) => setSavingsGoal2Description(e.target.value)} />
-                                {/* <button className="delete-button" onClick={() => setShowGoal2(false)}><i class="fa-solid fa-trash"></i></button> */}
-                              </div>
-                            </div>
-                            <div className="form-group">
-                              <label>Target Amount:</label>
-                              <input
-                                type="text"
-                                placeholder="£ Enter Amount"
-                                value={savingsGoal2Amount}
-                                onChange={(e) => setSavingsGoal2Amount(e.target.value)}
-                              />
-                            </div>
-                            <div className="form-group">
-                              <label>Target Years:</label>
-                              <input
-                                type="text"
-                                placeholder="Target Years"
-                                value={savingsGoal2Years}
-                                onChange={(e) => setSavingsGoal2Years(e.target.value)}
-                              />
-                            </div>
-
+                      {/* Render all savings goals */}
+                      {savingsGoals.map((goal, index) => (
+                        <div key={index} className="savings-goal-section">
+                          <div className="form-group">
+                            <label>Goal {index + 1}:</label>
+                            <input
+                              type="text"
+                              placeholder="Enter Goal Description"
+                              value={goal.description}
+                              onChange={(e) => updateSavingsGoal(index, 'description', e.target.value)}
+                            />
                           </div>
-                        )}
-                      </>
-                    )}
+                          <div className="form-group">
+                            <label>Target Amount {index + 1}:</label>
+                            <input
+                              type="text"
+                              placeholder="£ Enter Amount"
+                              value={goal.targetAmount}
+                              onChange={(e) => updateSavingsGoal(index, 'targetAmount', e.target.value)}
+                            />
+                          </div>
+                          <div className="form-group">
+                            <label>Target Years {index + 1}:</label>
+                            <input
+                              type="text"
+                              placeholder="Enter Years"
+                              value={goal.targetYears}
+                              onChange={(e) => updateSavingsGoal(index, 'targetYears', e.target.value)}
+                            />
+                          </div>
+                        </div>
+                      ))}
+                      {savingsGoals.length > 0 && (
+                            <button
+                              type="button"
+                              className='button-change'
+                              onClick={addSavingsGoal}
+                              style={{ marginLeft: '10px' }}
+                            >
+                              Add <i className="fa-solid fa-plus"></i>
+                            </button>
+                          )}
+                    </div>
+
+
                     <div className="form-group">
-                      <label>How much do you contribute to savings each month?</label>
+                      <label>How much do you contribute to savings each month? (other than pension(s))</label>
                       <input
                         type="text"
                         placeholder="£ Enter Amount"
@@ -1884,72 +1937,89 @@ const Home = () => {
                   <div className={`form-section pt-4 pb-4 ${activeTab === 3 ? "active" : ""}`}>
                     <h2>Debt Management</h2>
                     <p>Please provide information about your Debt Management Strategy</p>
-                    <div className="form-group">
-                      <label>Do you have a mortgage?</label>
-                      <div className="radio-group">
-                        <label>
-                          <input
-                            type="radio"
-                            value="Yes"
-                            checked={hasmortgage === true}
-                            onChange={() => setHasmortgage(true)}
-                          /> Yes
-                        </label>
-                        <label>
-                          <input
-                            type="radio"
-                            value="No"
-                            checked={hasmortgage === false}
-                            onChange={() => setHasmortgage(false)}
-                          /> No
-                        </label>
+                    <div>
+                      <div className="form-group">
+                        <label>Do you have a mortgage?</label>
+                        <div className="radio-group">
+                          <label>
+                            <input
+                              type="radio"
+                              value="Yes"
+                              checked={mortgages.length > 0}
+                              onChange={() => {
+                                if (mortgages.length === 0) addMortgage();
+                              }}
+                            /> Yes
+                          </label>
+                          <label>
+                            <input
+                              type="radio"
+                              value="No"
+                              checked={mortgages.length === 0}
+                              onChange={() => setMortgages([])}
+                            /> No
+                          </label>
+                          {/* Add button appears when "Yes" is selected */}
+                         
+                        </div>
                       </div>
-                    </div>
-                    {hasmortgage && (
-                      <>
-                        <div className="form-group">
-                          <label>Current mortgage balance</label>
-                          <input
-                            type="text"
-                            placeholder="£ Enter Amount"
-                            value={mortgageBalance}
-                            onChange={(e) => setmortgageBalance(e.target.value)}
-                          />
-                        </div>
-                        <div className="form-group">
-                          <label>Monthly mortgage payment</label>
-                          <input
-                            type="text"
-                            placeholder="£ Enter Amount"
-                            value={monthlymortgagePayment}
-                            onChange={(e) => setMonthlymortgagePayment(e.target.value)}
-                          />
-                        </div>
-                        <div className="form-group">
-                          <label>mortgage Interest Rate</label>
-                          <div className="input-group">
+
+                      {/* Render all mortgage inputs */}
+                      {mortgages.map((mortgage, index) => (
+                        <div key={index} className="mortgage-section">
+                          <div className="form-group">
+                            <label>Current mortgage balance {index + 1}</label>
                             <input
                               type="text"
-                              placeholder="Enter Percentage"
-                              value={mortgageInterestRate}
-                              onChange={(e) => setmortgageInterestRate(e.target.value)}
+                              placeholder="£ Enter Amount"
+                              value={mortgage.mortgageBalance}
+                              onChange={(e) => updateMortgage(index, 'mortgageBalance', e.target.value)}
                             />
-                            <span>%</span>
+                          </div>
+                          <div className="form-group">
+                            <label>Monthly mortgage payment {index + 1}</label>
+                            <input
+                              type="text"
+                              placeholder="£ Enter Amount"
+                              value={mortgage.monthlymortgagePayment}
+                              onChange={(e) => updateMortgage(index, 'monthlymortgagePayment', e.target.value)}
+                            />
+                          </div>
+                          <div className="form-group">
+                            <label>Mortgage Interest Rate {index + 1}</label>
+                            <div className="input-group">
+                              <input
+                                type="text"
+                                placeholder="Enter Percentage"
+                                value={mortgage.mortgageInterestRate}
+                                onChange={(e) => updateMortgage(index, 'mortgageInterestRate', e.target.value)}
+                              />
+                              <span>%</span>
+                            </div>
+                          </div>
+                          <div className="form-group">
+                            <label>Years left on mortgage {index + 1}</label>
+                            <input
+                              type="number"
+                              placeholder="Enter Years"
+                              value={mortgage.mortgageYearsLeft}
+                              onChange={(e) => updateMortgage(index, 'mortgageYearsLeft', e.target.value)}
+                            />
                           </div>
                         </div>
-                        <div className="form-group">
-                          <label>Years left on mortgage</label>
-                          <input
-                            type="number"
-                            placeholder="Enter Years"
-                            value={mortgageYearsLeft}
-                            onChange={(e) => setmortgageYearsLeft(e.target.value)}
-                          />
-                        </div>
-                      </>
-                    )}
+                      ))}
+                       {mortgages.length > 0 && (
+                            <button
+                              type="button button-change"
+                              onClick={addMortgage}
+                              style={{ marginLeft: '10px' }}
+                            >
+                              +
+                            </button>
+                          )}
+                    </div>
                     <div className="form-group">
-                      <label>Do you have other Debts (Credit Cards, Loans)?</label>
+                      <label>Do you have other Debts / Loans / Car Finance??</label>
                       <div className="radio-group">
                         <label>
                           <input
@@ -1991,7 +2061,7 @@ const Home = () => {
                         </div>
 
                         <div className="form-group">
-                          <label>Intersest Rate for other Debts (%)</label>
+                          <label>Interest Rate for other Debts (%)</label>
                           <input
                             type="text"
                             placeholder="Enter Interest Rate (%)"
@@ -2011,12 +2081,23 @@ const Home = () => {
                       />
                     </div>
                     <div className="form-group">
-                      <label>Credit Card Interest Rate?</label>
+                      <label>Credit Card Interest Rate (%)?</label>
                       <input
                         type="text"
                         placeholder="Enter Percentage (%)"
                         value={creditCardInterestRate}
                         onChange={(e) => setCreditCardInterestRate(e.target.value)}
+                      />
+                    </div>
+
+
+                    <div className="form-group">
+                      <label>Monthly Credit Card Payment.</label>
+                      <input
+                        type="text"
+                        placeholder="Enter Amount"
+                        value={monthlyCreditCardPayment}
+                        onChange={(e) => setMonthlyCreditCardPayment(e.target.value)}
                       />
                     </div>
                     <div className="nav-buttons">
@@ -2336,7 +2417,7 @@ const Home = () => {
                           <label>
                             <input
                               type="checkbox"
-                              value="Budgetting Help"
+                              value="Budgeting Help"
                               checked={needsBudgetHelp}
                               onChange={(e) => setNeedsBudgetHelp(e.target.checked)}
                             /> Budgetting Help
@@ -2410,29 +2491,6 @@ const Home = () => {
                         </div>
                       )}
                     </div>
-                    <div className="form-row">
-                      <div className="form-group full-width">
-                        <label>Would you be Interested in a Personalized Financial Plan Based on this Data?</label>
-                        <div className="radio-group">
-                          <label>
-                            <input
-                              type="radio"
-                              value="Yes"
-                              checked={wantsPersonalizedPlan === true}
-                              onChange={() => setWantsPersonalizedPlan(true)}
-                            /> Yes
-                          </label>
-                          <label>
-                            <input
-                              type="radio"
-                              value="No"
-                              checked={wantsPersonalizedPlan === false}
-                              onChange={() => setWantsPersonalizedPlan(false)}
-                            /> No
-                          </label>
-                        </div>
-                      </div>
-                    </div>
                     <div className="nav-buttons">
                       <a href="#Form-Main">
                         <button className="btn-back" onClick={(e) => { e.stopPropagation(); showTab(5) }}>
@@ -2497,7 +2555,7 @@ const Home = () => {
                   <div className="report-sidebar">
                     <div className="chart-section">
                       <Bar data={netWorthData} options={netWorthOptions} />
-                      <p>Total Net Worth: £{(insights?.net_worth?.total ?? 0).toFixed(2)}</p>
+                      <p>Total Net Worth: £{(insights?.recommendations?.insights?.net_worth?.total ?? 0).toFixed(2)}</p>
                     </div>
                     <div className="chart-section">
                       <Pie data={cashFlowExpensesData} options={cashFlowExpensesOptions} />
@@ -2509,15 +2567,15 @@ const Home = () => {
                     </div>
                     <div className="chart-section">
                       <Bar data={debtData} options={debtOptions} />
-                      <p>Interest Rate: {(insights?.debt?.mortgage_interest_rate ?? 0).toFixed(2)}%</p>
+                      <p>Interest Rate: {(insights?.recommendations?.insights?.debt?.mortgage_interest_rate ?? 0).toFixed(2)}%</p>
                     </div>
                     <div className="chart-section">
                       <Pie data={investmentsSavingsData} options={investmentsSavingsOptions} />
-                      <p>Allocation: {(insights?.investments_savings?.investment_allocation_percentage ?? 0).toFixed(2)}%</p>
+                      <p>Allocation: {(insights?.recommendations?.insights?.investments_savings?.investment_allocation_percentage ?? 0).toFixed(2)}%</p>
                     </div>
                     <div className="chart-section">
                       <Bar data={retirementData} options={retirementOptions} />
-                      <p>Employer Match: {(insights?.retirement?.employer_matches_pension ?? false) ? "Yes" : "No"}</p>
+                      <p>Employer Match: {(insights?.recommendations?.insights?.retirement?.employer_matches_pension ?? false) ? "Yes" : "No"}</p>
                     </div>
                   </div>
 
@@ -2586,13 +2644,13 @@ const Home = () => {
                               <p><strong>Improvements:</strong> {insights?.recommendations?.insights?.custom_recommendations?.improvements ?? "Not Available"}</p>
                             </td>
                           </tr>
-                          <tr>
+                          {/* <tr>
                             <td>Retirement Planning</td>
                             <td>
                               <p><strong>Future Savings Projection:</strong> {insights?.recommendations?.insights?.retirement_planning?.future_savings_projection ?? "Not Available"}</p>
                               <p><strong>Improvements:</strong> {insights?.recommendations?.insights?.retirement_planning?.improvements ?? "Not Available"}</p>
                             </td>
-                          </tr>
+                          </tr> */}
                           <tr>
                             <td>Disclaimer</td>
                             <td>
@@ -2611,7 +2669,10 @@ const Home = () => {
                 </div>
               </div>
             </div>
-          ) : <> {isLoading ? <>Generating Reports....</> : <></>}</>}
+          ) : <> {isLoading ? <div className="header-container">
+            <h1>Agentic Money AI generating insights…!</h1>
+            <div className="spinner"></div>
+          </div> : <></>}</>}
 
           {insights ? (
             <div className="download-button-container">

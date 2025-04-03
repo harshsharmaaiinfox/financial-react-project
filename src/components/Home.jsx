@@ -1,12 +1,13 @@
 // src/components/FinancialData.js
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, CSSProperties } from 'react';
 import { apiPost } from '../service/client';
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import Header from './Header';
 import Footer from './Footer';
 import $ from 'jquery';
-import TabbedContent from '../components/Form-conponent';
+import { Audio } from 'react-loader-spinner'
+
 import {
   Bar,
   Pie,
@@ -14,6 +15,13 @@ import {
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from "chart.js";
 
 ChartJS.register(ArcElement, Tooltip, Legend, BarElement, CategoryScale, LinearScale);
+
+
+// const override: CSSProperties = {
+//   display: "block",
+//   margin: "0 auto",
+//   borderColor: "red",
+// };
 
 const Home = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -113,11 +121,10 @@ const Home = () => {
   const [additionalExpenses, setAdditionalExpenses] = useState([]);
   const [additionalVariableExpenses, setAdditionalVariableExpenses] = useState([]);
   const [totalOtherMonthlyIncome, setTotalOtherMonthlyIncome] = useState("");
-
   const [savingsGoals, setSavingsGoals] = useState([]);
-
   const [showExpenseListText, setShowExpenseListText] = useState(false);
-  const [showAdditionalExpenseList,setShowAdditionalExpenseList] = useState(false);
+  const [showAdditionalExpenseList, setShowAdditionalExpenseList] = useState(false);
+  let [color, setColor] = useState("#2B63E1");
 
 
 
@@ -1833,7 +1840,7 @@ const Home = () => {
                             /> No
                           </label>
                           {/* Add button appears when "Yes" is selected */}
-                          
+
                         </div>
                       </div>
 
@@ -1870,15 +1877,15 @@ const Home = () => {
                         </div>
                       ))}
                       {savingsGoals.length > 0 && (
-                            <button
-                              type="button"
-                              className='button-change'
-                              onClick={addSavingsGoal}
-                              style={{ marginLeft: '10px' }}
-                            >
-                               <i className="fa-solid fa-plus"></i>
-                            </button>
-                          )}
+                        <button
+                          type="button"
+                          className='button-change'
+                          onClick={addSavingsGoal}
+                          style={{ marginLeft: '10px' }}
+                        >
+                          <i className="fa-solid fa-plus"></i>
+                        </button>
+                      )}
                     </div>
 
 
@@ -1960,7 +1967,7 @@ const Home = () => {
                             /> No
                           </label>
                           {/* Add button appears when "Yes" is selected */}
-                         
+
                         </div>
                       </div>
 
@@ -2008,15 +2015,15 @@ const Home = () => {
                           </div>
                         </div>
                       ))}
-                       {mortgages.length > 0 && (
-                            <button
-                              type="button button-change"
-                              onClick={addMortgage}
-                              style={{ marginLeft: '10px' }}
-                            >
-                              +
-                            </button>
-                          )}
+                      {mortgages.length > 0 && (
+                        <button
+                          type="button button-change"
+                          onClick={addMortgage}
+                          style={{ marginLeft: '10px' }}
+                        >
+                          +
+                        </button>
+                      )}
                     </div>
                     <div className="form-group">
                       <label>Do you have other Debts / Loans / Car Finance?</label>
@@ -2671,7 +2678,20 @@ const Home = () => {
             </div>
           ) : <> {isLoading ? <div className="header-container">
             <h1>Agentic Money AI generating insights…!</h1>
-            <div className="spinner"></div>
+            <div className="loader-container">
+
+              <Audio
+                height="80"
+                width="80"
+                radius="9"
+                color="green"
+                ariaLabel="loading"
+                wrapperStyle
+                wrapperClass
+              />
+
+            </div>
+
           </div> : <></>}</>}
 
           {insights ? (
@@ -2733,8 +2753,16 @@ const Home = () => {
             />
           ) : (
             // Fallback to table display if no html_design
-            <div className="table-responsive">
-              Generating Result..
+            <div className="loader-container">
+              <Audio
+                height="80"
+                width="80"
+                radius="9"
+                color="green"
+                ariaLabel="loading"
+                wrapperStyle
+                wrapperClass
+              />
             </div>
           )}
         </div>

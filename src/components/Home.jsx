@@ -2019,7 +2019,7 @@ const Home = () => {
                           )}
                     </div>
                     <div className="form-group">
-                      <label>Do you have other Debts / Loans / Car Finance??</label>
+                      <label>Do you have other Debts / Loans / Car Finance?</label>
                       <div className="radio-group">
                         <label>
                           <input

@@ -1883,7 +1883,7 @@ const Home = () => {
 
 
                     <div className="form-group">
-                      <label>How much do you contribute to savings each month? (other than pension(s))</label>
+                      <label>How much do you contribute to savings each month? (other than pension's)</label>
                       <input
                         type="text"
                         placeholder="£ Enter Amount"

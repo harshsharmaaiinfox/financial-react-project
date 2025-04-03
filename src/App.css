@@ -470,13 +470,7 @@
 
 
 @media(max-width:1000px){
-  .nav-buttons {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-    gap: 10px;
-    flex-direction: column;
-} 
+ 
 }
 
 @media(max-width:768px){
@@ -604,8 +598,8 @@ button.btn-next {
 
 .nav-buttons {
   display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
+  margin-top: 0px !important;
+  gap: 15px;
 }
 
 .btn-back,

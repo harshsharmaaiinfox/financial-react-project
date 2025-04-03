@@ -1772,6 +1772,7 @@ const Home = () => {
                       </>
                     )}
 
+                    <div className="btn-setting">
                     <div className="nav-buttons">
                       <a href="#Form-Main">
                         <button className="btn-back" onClick={(e) => { e.stopPropagation(); showTab(0) }}>
@@ -1787,6 +1788,7 @@ const Home = () => {
                     </div>
                     <div className="btn-gen mt-2">
                       <button className='btn-next' onClick={(e) => { handleSubmitSteps(); }}>Generate</button>
+                    </div>
                     </div>
                   </div>
 
@@ -1919,6 +1921,7 @@ const Home = () => {
                         </label>
                       </div>
                     </div> */}
+                    <div className="btn-setting">
                     <div className="nav-buttons">
                       <a href="#Form-Main">
                         <button className="btn-back" onClick={(e) => { e.stopPropagation(); showTab(1) }}>
@@ -1933,6 +1936,7 @@ const Home = () => {
                     </div>
                     <div className="btn-gen mt-2">
                       <button className='btn-next' onClick={(e) => { handleSubmitSteps(); }}>Generate</button>
+                    </div>
                     </div>
                   </div>
 
@@ -2107,6 +2111,7 @@ const Home = () => {
                         onChange={(e) => setMonthlyCreditCardPayment(e.target.value)}
                       />
                     </div>
+                    <div className="btn-setting">
                     <div className="nav-buttons">
                       <a href="#Form-Main">
                         <button className="btn-back" onClick={(e) => { e.stopPropagation(); showTab(2) }}>
@@ -2121,6 +2126,7 @@ const Home = () => {
                     </div>
                     <div className="btn-gen mt-2">
                       <button className='btn-next' onClick={(e) => { handleSubmitSteps(); }}>Generate</button>
+                    </div>
                     </div>
                   </div>
 
@@ -2266,6 +2272,7 @@ const Home = () => {
                         />
                       </div>
                     </div>
+                    <div className="btn-setting">
                     <div className="nav-buttons">
                       <a href="#Form-Main">
                         <button className="btn-back" onClick={(e) => { e.stopPropagation(); showTab(3) }}>
@@ -2280,6 +2287,7 @@ const Home = () => {
                     </div>
                     <div className="btn-gen mt-2">
                       <button className='btn-next' onClick={(e) => { handleSubmitSteps(); }}>Generate</button>
+                    </div>
                     </div>
                   </div>
 
@@ -2382,6 +2390,7 @@ const Home = () => {
                         </div>
                       </div>
                     </div>
+                    <div className="btn-setting">
                     <div className="nav-buttons">
                       <a href="#Form-Main">
                         <button className="btn-back" onClick={(e) => { e.stopPropagation(); showTab(4) }}>
@@ -2396,6 +2405,7 @@ const Home = () => {
                     </div>
                     <div className="btn-gen mt-2">
                       <button className='btn-next' onClick={(e) => { handleSubmitSteps(); }}>Generate</button>
+                    </div>
                     </div>
                   </div>
 
@@ -2498,6 +2508,7 @@ const Home = () => {
                         </div>
                       )}
                     </div>
+                    <div className="btn-setting">
                     <div className="nav-buttons">
                       <a href="#Form-Main">
                         <button className="btn-back" onClick={(e) => { e.stopPropagation(); showTab(5) }}>
@@ -2512,6 +2523,7 @@ const Home = () => {
                     </div>
                     <div className="btn-gen mt-2">
                       <button className='btn-next' onClick={(e) => { handleSubmitSteps(); }}>Generate</button>
+                    </div>
                     </div>
                   </div>
 

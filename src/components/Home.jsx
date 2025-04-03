@@ -1876,7 +1876,7 @@ const Home = () => {
                               onClick={addSavingsGoal}
                               style={{ marginLeft: '10px' }}
                             >
-                              Add <i className="fa-solid fa-plus"></i>
+                               <i className="fa-solid fa-plus"></i>
                             </button>
                           )}
                     </div>

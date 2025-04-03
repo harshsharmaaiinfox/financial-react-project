@@ -1617,7 +1617,7 @@ const Home = () => {
                     </div>
                     <>
                       <div className="form-group">
-                        <label>Total Monthly Fixed Expenses ( Utilities, Insurance)?</label>
+                        <label>Total Monthly Fixed Expenses (Utilities, Insurance, excluding mortgage payments and pension contributions/savings allocations)?</label>
                         <div style={{ display: 'flex', alignItems: 'center' }}>
                           <input
                             type="text"
@@ -1733,11 +1733,11 @@ const Home = () => {
                           <div className="input-group">
                             <input
                               type="text"
-                              placeholder="Enter percentage"
+                              placeholder="Enter Amount"
                               value={investmentAllocationPercentage}
                               onChange={(e) => setInvestmentAllocationPercentage(e.target.value)}
                             />
-                            <span>%</span>
+                          
                           </div>
                         </div>
                         <div className="form-group">

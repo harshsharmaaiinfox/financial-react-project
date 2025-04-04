@@ -1090,8 +1090,10 @@ line-height: 40px;
     font-weight: bold;
     li {
       background: #f0f0f0; /* Replace with the desired color */
+      border-radius: 5px;
       a {
         padding: .5em 1em;
+        border-radius: 5px;
         &:hover,
         &.active {
           background-color: #e0e7ff; /* Replace with the desired active tab styles */
@@ -1303,4 +1305,103 @@ button.button-change {
 }
 .btn-gen.mt-2 {
   margin-top: 0px !important;
+}
+
+/* Full-screen overlay */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Ensure it is on top of all other content */
+}
+
+/* Centered loader container */
+.loader-container {
+  text-align: center;
+  color: white;
+}
+
+/* Custom Spinner Styles */
+.custom-spinner {
+  width: 60px;
+  height: 60px;
+  border: 8px solid #f3f3f3; /* Light background for the spinner */
+  border-top: 8px solid #1a73e8; /* Blue color for the spinning section */
+  border-radius: 50%;
+  animation: spin 2s linear infinite; /* Smooth continuous rotation */
+}
+
+/* Spinner animation */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg); /* Start at 0 degrees */
+  }
+  100% {
+    transform: rotate(360deg); /* Complete 360 degree rotation */
+  }
+}
+
+
+.loading{
+  width: 50px;
+  height: 50px;
+  margin: 0 auto;
+  position: relative;
+}
+.loading::before,.loading::after{
+  content: '';
+  background-color: #fff;
+  position: absolute;
+  border-radius: 50%;
+  inset: 0;
+}
+.loading::before{
+  --animation-delay:0ms;
+}
+.loading::after{
+  background-color: #1a73e8;
+  transform: scale(0);
+  inset: 5px;
+  --animation-delay:500ms;
+}
+.loading::before,.loading::after{
+  animation: scale 1s infinite;
+  animation-delay: var(--animation-delay);
+}
+@keyframes scale{
+  from{
+      transform: scale(0);
+      opacity: 1;
+  }
+  to{
+      transform: scale(1);
+      opacity: 0;
+  }
+}
+
+.form-group button {
+  background: transparent;
+  border-radius: 50%;
+  font-size: 25px;
+  padding: 0px !important;
+  border: none;
+}
+button.button-change{
+  background: transparent;
+  border-radius: 50%;
+  font-size: 25px;
+  padding: 0px !important;
+  border: none;
+}
+.form-group.my-group {
+  margin-bottom: 0px;
+}
+i.fa-solid.fa-circle-plus {
+  color: #007bff;
 }

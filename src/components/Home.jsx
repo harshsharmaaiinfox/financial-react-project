@@ -898,7 +898,9 @@ const Home = () => {
                   investments, and expert advice tailored to your goals. Let's build
                   your financial freedom—starting today.
                 </p>
-                <button className="btn-start">Get Started</button>
+               <a href='#Form-Main'>
+               <button className="btn-start">Get Started</button>
+               </a>
               </div>
             </div>
             <div className="col-lg-6 d-flex banner-res">
@@ -1629,7 +1631,7 @@ const Home = () => {
                             onClick={addExpenseField}
                             style={{ marginLeft: '10px', padding: '5px 10px' }}
                           >
-                            +
+                           <i class="fa-solid fa-circle-plus"></i>
                           </button>
                         </div>
                       </div>
@@ -1675,7 +1677,7 @@ const Home = () => {
                             onClick={addVariableExpenseField}
                             style={{ marginLeft: '10px', padding: '5px 10px' }}
                           >
-                            +
+                            <i class="fa-solid fa-circle-plus"></i>
                           </button>
                         </div>
                       </div>
@@ -1867,7 +1869,7 @@ const Home = () => {
                               onChange={(e) => updateSavingsGoal(index, 'targetAmount', e.target.value)}
                             />
                           </div>
-                          <div className="form-group">
+                          <div className="form-group my-group">
                             <label>Target Years {index + 1}:</label>
                             <input
                               type="text"
@@ -1885,7 +1887,7 @@ const Home = () => {
                           onClick={addSavingsGoal}
                           style={{ marginLeft: '10px' }}
                         >
-                          <i className="fa-solid fa-plus"></i>
+                          <i class="fa-solid fa-circle-plus"></i>
                         </button>
                       )}
                     </div>
@@ -1945,7 +1947,7 @@ const Home = () => {
               <section id="tab4" className="item" data-title="Debt Management" onClick={() => { showTab(3); }} >
                 <div className="item-content">
 
-                  <div className={`form-section pt-4 pb-4 ${activeTab === 3 ? "active" : ""}`}>
+                  <div className={`form-section  ${activeTab === 3 ? "active" : ""}`}>
                     <h2>Debt Management</h2>
                     <p>Please provide information about your Debt Management Strategy</p>
                     <div>
@@ -2688,23 +2690,14 @@ const Home = () => {
                 </div>
               </div>
             </div>
-          ) : <> {isLoading ? <div className="header-container">
-            <h1>Agentic Money AI generating insights…!</h1>
-            <div className="loader-container">
-
-              <Audio
-                height="80"
-                width="80"
-                radius="9"
-                color="green"
-                ariaLabel="loading"
-                wrapperStyle
-                wrapperClass
-              />
-
+          ) : <> {isLoading ? <div >
+            <div className="header-container">
+              <h1>Agentic Money AI generating insights…!</h1>
+              <div className="loader-container overlay">
+                <div className="custom-spinner"></div> {/* Custom Spinner */}
+              </div>
             </div>
-
-          </div> : <></>}</>}
+          </div>: <></>}</>}
 
           {insights ? (
             <div className="download-button-container">
@@ -2765,17 +2758,9 @@ const Home = () => {
             />
           ) : (
             // Fallback to table display if no html_design
-            <div className="loader-container">
-              <Audio
-                height="80"
-                width="80"
-                radius="9"
-                color="green"
-                ariaLabel="loading"
-                wrapperStyle
-                wrapperClass
-              />
-            </div>
+            <div className="loader-container overlay">
+                <div className="custom-spinner"></div> {/* Custom Spinner */}
+              </div>
           )}
         </div>
       </div>

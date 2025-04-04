@@ -2692,8 +2692,9 @@ const Home = () => {
             </div>
           ) : <> {isLoading ? <div >
             <div className="header-container">
+              
+              <div className="loader-container overlay d-flex flex-column">
               <h1>Agentic Money AI generating insights…!</h1>
-              <div className="loader-container overlay">
                 <div className="custom-spinner"></div> {/* Custom Spinner */}
               </div>
             </div>
@@ -2758,7 +2759,8 @@ const Home = () => {
             />
           ) : (
             // Fallback to table display if no html_design
-            <div className="loader-container overlay">
+            <div className="loader-container overlay d-flex flex-column">
+               <h1>Agentic Money AI generating insights…!</h1>
                 <div className="custom-spinner"></div> {/* Custom Spinner */}
               </div>
           )}

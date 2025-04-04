@@ -2599,7 +2599,7 @@ const Home = () => {
                   </div>
 
                   <div className="report-main">
-                    <div className="insights-subsection">
+                    {/* <div className="insights-subsection">
                       <h3>Recommendations</h3>
                       {(insights?.recommendations?.recommadations ?? []).map((rec, index) => (
                         <div key={index} className="recommendation-item">
@@ -2607,7 +2607,7 @@ const Home = () => {
                           <p>{rec?.recommendation ?? "No Recommendation Provided"}</p>
                         </div>
                       ))}
-                    </div>
+                    </div> */}
 
                     <div className="insights-subsection">
                       <h3>Insights</h3>

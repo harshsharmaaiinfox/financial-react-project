@@ -315,6 +315,7 @@ const Home = () => {
       id: id,
       //cash_savings: parseFloat(bankSavings) || 0 + parseFloat(iasSavings) || 0 + parseFloat(emergencySavings) || 0,
       bank_account_savings: parseFloat(bankSavings) || 0,
+      current_age:age,
       isa_savings: parseFloat(iasSavings) || 0,
       owns_real_estate: ownsRealEstate,
       num_properties: parseInt(numProperties) || 0,
@@ -324,6 +325,7 @@ const Home = () => {
       has_investments: hasInvestments,
       saving_goals: savingsGoals,
       mortgages: mortgages,
+      otherDebtBalance:otherDebtBalance,
       investments_value: parseFloat(investmentsValue) || 0,
       has_valuable_assets: hasValuableAssets,
       valuable_assets_value: parseFloat(valuableAssetsValue) || 0,
@@ -419,7 +421,9 @@ const Home = () => {
 
 
     const formData = {
-      cash_savings: parseFloat(bankSavings) || 0 + parseFloat(iasSavings) || 0 + parseFloat(emergencySavings) || 0,
+      bank_account_savings: parseFloat(bankSavings) || 0,
+      current_age:age,
+      isa_savings: parseFloat(iasSavings) || 0,
       owns_real_estate: ownsRealEstate,
       num_properties: parseInt(numProperties) || 0,
       primary_residence_value: parseFloat(primaryResidenceValue) || 0,
@@ -432,6 +436,7 @@ const Home = () => {
       valuable_assets_value: parseFloat(valuableAssetsValue) || 0,
       has_mortgage: hasmortgage,
       mortgages: mortgages,
+      otherDebtBalance:otherDebtBalance,
       total_other_monthly_income: totalOtherMonthlyIncome,
       // mortgage_balance: parseFloat(mortgageBalance) || 0,
       // monthly_mortgage_payment: parseFloat(monthlymortgagePayment) || 0,
@@ -441,6 +446,7 @@ const Home = () => {
       saving_goals: savingsGoals,
       // other_debt_balance: parseFloat(otherDebtBalance) || 0,
       monthly_debt_repayment: parseFloat(monthlyDebtRepayment) || 0,
+      monthly_credit_card_payment: parseFloat(monthlyCreditCardPayment) || 0,
       debt_interest_rate: parseFloat(debtInterestRate) || 0,
       monthly_income: parseFloat(monthlyIncome) || 0,
       receives_rental_income: receivesRentalIncome,
@@ -1648,14 +1654,14 @@ const Home = () => {
                           <input
                             type="text"
                             placeholder="Expense Name (e.g., Rent, Council Tax,TV Licence,Insurance Premiums , Childcare Fees or School Fees ,Season Ticket or Travel Pass  etc.)"
-                            value={expense.name}
+                            value={expense?.name}
                             onChange={(e) => handleExpenseChange(index, 'name', e.target.value)}
                             style={{ marginRight: '10px' }}
                           />
                           <input
                             type="text"
                             placeholder="£ Enter Amount"
-                            value={expense.amount}
+                            value={expense?.amount}
                             onChange={(e) => handleExpenseChange(index, 'amount', e.target.value)}
                           />
                         </div>
@@ -1693,7 +1699,7 @@ const Home = () => {
                           <input
                             type="text"
                             placeholder="Expense Name (e.g., Groceries & Household Supplies , Dining Out & Takeaways ,Clothing & Footwear ,Entertainment & Leisure etc.)"
-                            value={expense.name}
+                            value={expense?.name}
                             onChange={(e) => handleVariableExpenseChange(index, 'name', e.target.value)}
                             style={{ marginRight: '10px' }}
                           />
@@ -1829,9 +1835,9 @@ const Home = () => {
                             <input
                               type="radio"
                               value="Yes"
-                              checked={savingsGoals.length > 0}
+                              checked={savingsGoals?.length > 0}
                               onChange={() => {
-                                if (savingsGoals.length === 0) addSavingsGoal();
+                                if (savingsGoals?.length === 0) addSavingsGoal();
                               }}
                             /> Yes
                           </label>
@@ -1839,7 +1845,7 @@ const Home = () => {
                             <input
                               type="radio"
                               value="No"
-                              checked={savingsGoals.length === 0}
+                              checked={savingsGoals?.length === 0}
                               onChange={() => setSavingsGoals([])}
                             /> No
                           </label>
@@ -1849,7 +1855,7 @@ const Home = () => {
                       </div>
 
                       {/* Render all savings goals */}
-                      {savingsGoals.map((goal, index) => (
+                      {savingsGoals?.map((goal, index) => (
                         <div key={index} className="savings-goal-section">
                           <div className="form-group">
                             <label>Goal {index + 1}:</label>
@@ -1958,9 +1964,9 @@ const Home = () => {
                             <input
                               type="radio"
                               value="Yes"
-                              checked={mortgages.length > 0}
+                              checked={mortgages?.length > 0}
                               onChange={() => {
-                                if (mortgages.length === 0) addMortgage();
+                                if (mortgages?.length === 0) addMortgage();
                               }}
                             /> Yes
                           </label>
@@ -1968,7 +1974,7 @@ const Home = () => {
                             <input
                               type="radio"
                               value="No"
-                              checked={mortgages.length === 0}
+                              checked={mortgages?.length === 0}
                               onChange={() => setMortgages([])}
                             /> No
                           </label>
@@ -1978,14 +1984,14 @@ const Home = () => {
                       </div>
 
                       {/* Render all mortgage inputs */}
-                      {mortgages.map((mortgage, index) => (
+                      {mortgages?.map((mortgage, index) => (
                         <div key={index} className="mortgage-section">
                           <div className="form-group">
                             <label>Current mortgage balance {index + 1}</label>
                             <input
                               type="text"
                               placeholder="£ Enter Amount"
-                              value={mortgage.mortgageBalance}
+                              value={mortgage?.mortgageBalance}
                               onChange={(e) => updateMortgage(index, 'mortgageBalance', e.target.value)}
                             />
                           </div>
@@ -1994,7 +2000,7 @@ const Home = () => {
                             <input
                               type="text"
                               placeholder="£ Enter Amount"
-                              value={mortgage.monthlymortgagePayment}
+                              value={mortgage?.monthlymortgagePayment}
                               onChange={(e) => updateMortgage(index, 'monthlymortgagePayment', e.target.value)}
                             />
                           </div>
@@ -2004,7 +2010,7 @@ const Home = () => {
                               <input
                                 type="text"
                                 placeholder="Enter Percentage"
-                                value={mortgage.mortgageInterestRate}
+                                value={mortgage?.mortgageInterestRate}
                                 onChange={(e) => updateMortgage(index, 'mortgageInterestRate', e.target.value)}
                               />
                               <span>%</span>
@@ -2015,13 +2021,13 @@ const Home = () => {
                             <input
                               type="number"
                               placeholder="Enter Years"
-                              value={mortgage.mortgageYearsLeft}
+                              value={mortgage?.mortgageYearsLeft}
                               onChange={(e) => updateMortgage(index, 'mortgageYearsLeft', e.target.value)}
                             />
                           </div>
                         </div>
                       ))}
-                      {mortgages.length > 0 && (
+                      {mortgages?.length > 0 && (
                         <button
                           type="button button-change"
                           onClick={addMortgage}
@@ -2576,7 +2582,7 @@ const Home = () => {
                   <div className="report-sidebar">
                     <div className="chart-section">
                       <Bar data={netWorthData} options={netWorthOptions} />
-                      <p>Total Net Worth: £{(insights?.recommendations?.insights?.net_worth?.total ?? 0).toFixed(2)}</p>
+                      <p>Total Net Worth: £{(insights?.recommendations?.insights?.net_worth?.total ?? 0)}</p>
                     </div>
                     <div className="chart-section">
                       <Pie data={cashFlowExpensesData} options={cashFlowExpensesOptions} />
@@ -2588,11 +2594,11 @@ const Home = () => {
                     </div>
                     <div className="chart-section">
                       <Bar data={debtData} options={debtOptions} />
-                      <p>Interest Rate: {(insights?.recommendations?.insights?.debt?.mortgage_interest_rate ?? 0).toFixed(2)}%</p>
+                      <p>Interest Rate: {(insights?.recommendations?.insights?.debt?.mortgage_interest_rate ?? 0)}%</p>
                     </div>
                     <div className="chart-section">
                       <Pie data={investmentsSavingsData} options={investmentsSavingsOptions} />
-                      <p>Allocation: {(insights?.recommendations?.insights?.investments_savings?.investment_allocation_percentage ?? 0).toFixed(2)}%</p>
+                      <p>Allocation: {(insights?.recommendations?.insights?.investments_savings?.investment_allocation_percentage ?? 0)}%</p>
                     </div>
                     <div className="chart-section">
                       <Bar data={retirementData} options={retirementOptions} />
@@ -2616,8 +2622,8 @@ const Home = () => {
                       <table className="insights-table">
                         <thead>
                           <tr>
-                            <th>Category</th>
-                            <th>Details</th>
+                            <th className='text-dark'>Category</th>
+                            <th className='text-dark'>Details</th>
                           </tr>
                         </thead>
                         <tbody>

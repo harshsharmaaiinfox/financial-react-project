@@ -1379,7 +1379,7 @@ const Home = () => {
                     <p>Please provide information about your assets and liabilities</p>
 
                     <div className="form-group">
-                      <label>Enter Your Age?</label>
+                      <label>Enter Your Age</label>
                       <input
                         type="number"
                         placeholder="Enter your Age (18-75)"
